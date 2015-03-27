@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <string>
 #include <new>
 #include <vector>
@@ -56,7 +56,7 @@ int divx(int a, int b){
 
 
 int main(){
-	//using Óï·¨Í¬Ñù¿ÉÒÔ´ïµ½typedefµÄĞ§¹û
+	//using è¯­æ³•åŒæ ·å¯ä»¥è¾¾åˆ°typedefçš„æ•ˆæœ
 	using pf = int(*)(int, int);
 
 	vector<pf> farr = { multpyx, divx, plusx, minusx };
