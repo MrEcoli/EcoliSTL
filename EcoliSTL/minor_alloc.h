@@ -1,6 +1,0 @@
-﻿#ifndef _ECOLISTL_MINOR_ALLOC_H
-#define _ECOLISTL_MINOR_ALLOC_H
-
-
-
-#endif
