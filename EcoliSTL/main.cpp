@@ -5,12 +5,11 @@
 using namespace std;
 
 #include "allocator.h"
+#include "iterator.h"
 
 
 
 int main(){
-
-
 
 
 	cout << "ending" << endl;
