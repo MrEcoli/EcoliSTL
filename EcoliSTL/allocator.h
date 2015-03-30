@@ -39,8 +39,8 @@ namespace EcoliSTL{
 			sub_alloc::deallocate(ptr, sizeof(T));
 		}
 
-		static void deallocate(pointer, size_type){
-			sub_alloc::deallocate(ptr, size_type * sizeof(T));
+		static void deallocate(pointer ptr, size_type n){
+			sub_alloc::deallocate(ptr, n * sizeof(T));
 		}
 
 		//construct until C++11 
