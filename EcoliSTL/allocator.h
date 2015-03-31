@@ -50,7 +50,7 @@ namespace EcoliSTL{
 		}
 
 		static void destroy(pointer ptr){
-			EcoliSTL::_destroy(ptr);
+			EcoliSTL::destroy(ptr);
 		}
 	};
 

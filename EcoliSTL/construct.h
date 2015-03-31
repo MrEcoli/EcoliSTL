@@ -29,7 +29,7 @@ namespace EcoliSTL{
 	}
 
 	template<class ForwardIterator, class T>
-	inline void construct(ForwardIterator first, ForwardIterator last, const T& val, _true_type){
+	inline void construct(ForwardIterator first, ForwardIterator last, const T& val, _false_type){
 		for (; first != last; ++first) {
 			construct(&*first, val);
 		}
@@ -93,7 +93,7 @@ namespace EcoliSTL{
 	}
 
 	template<class InputIterator, class ForwardIterator>
-	inline ForwardIterator _uninitialized_copy(InputIterator first, InputIterator last, ForwardIterator out, _true_type){
+	inline ForwardIterator _uninitialized_copy_aux(InputIterator first, InputIterator last, ForwardIterator out, _true_type){
 		for (; first != last; first++, out++){
 			*out = *first;
 		}
@@ -101,7 +101,7 @@ namespace EcoliSTL{
 	}
 
 	template<class InputIterator, class ForwardIterator>
-	inline ForwardIterator _uninitialized_copy(InputIterator first, InputIterator last, ForwardIterator out, _false_type){
+	inline ForwardIterator _uninitialized_copy_aux(InputIterator first, InputIterator last, ForwardIterator out, _false_type){
 		
 		for (; first != last; ++first, ++out) {
 			construct(&*out, *first);
@@ -156,7 +156,7 @@ namespace EcoliSTL{
 	template<class ForwardIterator, class Distance, class T>
 	inline void _uninitialized_fill_n_aux(ForwardIterator first, Distance dis, const T& v, _true_type){
 		Distance size = 0;
-		while (size £¡ = dis) {
+		while (size != dis) {
 			size++;
 			*first = v;
 			first++;

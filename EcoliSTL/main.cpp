@@ -7,58 +7,28 @@
 #include <vector>
 #include <set>
 
-class Base{
-public:
-
-	Base(){
-		std::cout << "constructing" << std::endl;
-		val = st_val++;
-		std::cout << val << std::endl;
-	}
-
-	Base(const Base &others){
-		std::cout << "copy function" << std::endl;
-		val = st_val++;
-	}
-
-	~Base(){
-		std::cout << "destroying " << val << std::endl;
-	}
-	static int st_val;
-
-	bool operator<(const Base& rhs)const{
-
-		return this->val < rhs.val;
-	}
+#include "UnitTest/123.cpp"
 
 
-	int val;
-};
 
-int Base::st_val = 1;
 
 int main(){
 
 
-	std::vector<Base> vec(4);
-	std::set<Base> s;
-
-	s.insert(Base()); s.insert(Base()); s.insert(Base()); s.insert(Base());
-
-	for (auto iter = s.begin(); iter != s.end(); ++iter) {
-		std::cout << iter->val << std::endl;
-	}
+	EcoliSTL::vector<int> vec1;
 
 
 
+	vec1.insert(vec1.begin (), 10, 10);
+
+	vec1.print();
+	
+	EcoliSTL::vector<int> vec2 = vec1;
+
+	vec2.print();
 
 
-
-
-	std::cout << "-------------" << std::endl;
-
-
-
+	
 
 
 

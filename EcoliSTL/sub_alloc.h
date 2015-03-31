@@ -108,6 +108,8 @@ namespace EcoliSTL{
 
 	sub_alloc::obj* sub_alloc::free_list[_NUM_FREELIST] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
+
+	//
 	void* sub_alloc::refill(size_t n){
 		//默认重新分配20个结点；
 
@@ -148,12 +150,12 @@ namespace EcoliSTL{
 	//free_list无可用内存时调用
 	char* sub_alloc::chunk_alloc(size_t n, int &num_objs) {
 		
-		unsigned left_bytes = pool_end - pool_start;
-		unsigned require_bytes = n*num_objs;
+		size_t left_bytes = pool_end - pool_start;
+		size_t require_bytes = n*num_objs;
 		char *ret;
 
 		//内存池满足需求
-		if (left_bytes > require_bytes){
+		if (left_bytes >= require_bytes){
 			ret = pool_start;
 			pool_start += require_bytes;
 			return ret;
@@ -161,8 +163,8 @@ namespace EcoliSTL{
 		//还有至少能满足一个对象的空间
 		else if (left_bytes >= n){
 			num_objs = left_bytes / n;
-			pool_start += (num_objs * n);
 			ret = pool_start;
+			pool_start += (num_objs * n);
 			return ret;
 		}
 		//如果剩余空间连一个对象都不能配置

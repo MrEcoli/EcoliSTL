@@ -23,6 +23,23 @@ namespace EcoliSTL{
 		return true;
 	}
 
+	template<class T>
+	void swap(T& lhs, T& rhs){
+		T tmp = T(lhs);
+		lhs = rhs;
+		rhs = tmp;
+	}
+
+	template<class BidrecIterator1, class BidrecIterator2>
+	BidrecIterator2 copy_reverse(BidrecIterator1 first, BidrecIterator1 last, BidrecIterator2 result){
+		--last; --result;
+
+		for (; first <= last; --last, --result) {
+			*result = *last;
+		}
+
+		return result;
+	}
 
 }
 

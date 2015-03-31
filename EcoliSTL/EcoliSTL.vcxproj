@@ -71,6 +71,7 @@
     <ClInclude Include="allocator.h" />
     <ClInclude Include="construct.h" />
     <ClInclude Include="iterator.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="sub_alloc.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="_type_trait.h" />
