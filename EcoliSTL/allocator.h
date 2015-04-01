@@ -13,7 +13,7 @@
 
 
 
-namespace EcoliSTL{
+namespace EcSTL{
 	//标准的 STL 接口
 	
 	//C++11中添加的支持多个参数构造函数的construct
@@ -50,8 +50,15 @@ namespace EcoliSTL{
 		}
 
 		static void destroy(pointer ptr){
-			EcoliSTL::destroy(ptr);
+			EcSTL::destroy(ptr);
 		}
+		static void destroy(pointer ptr, size_type n){
+			EcSTL::destory(ptr, n);
+		}
+		static void destory(pointer first, pointer last){
+			EcSTL::destroy(first, last);
+		}
+
 	};
 
 

@@ -3,7 +3,7 @@
 
 #include <cstdlib>
 
-namespace EcoliSTL{
+namespace EcSTL{
 	enum {_ALIGN = 8}; //分配内存的最小单位；
 	enum { _MAX_BYTES = 128 };	//内存池可分配的最大单位；
 	enum { _NUM_FREELIST = _MAX_BYTES / _ALIGN }; //sub_alloc维护的内存池的链表数组大小；

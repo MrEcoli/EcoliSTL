@@ -13,36 +13,43 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="UnitTest">
+      <UniqueIdentifier>{cfcccff3-7fed-4703-a154-34d76c7ca8c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="UnitTest\vector_test.cpp">
+      <Filter>UnitTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="_type_trait.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="allocator.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="construct.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="sub_alloc.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="iterator.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="_type_trait.h">
+    <ClInclude Include="sub_alloc.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="vector.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="algorithm.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

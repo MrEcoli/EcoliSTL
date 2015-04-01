@@ -1,13 +1,8 @@
-﻿#include <iostream>
+﻿/*
+#include <iostream>
 #include <string>
 #include <new>
-#include "allocator.h"
-#include "iterator.h"
 #include "vector.h"
-#include <vector>
-#include <set>
-
-#include "UnitTest/123.cpp"
 
 
 
@@ -36,4 +31,4 @@ int main(){
 	std::cout << "ending" << std::endl;
 	std::cin.get();
 	return 0;
-}
+}*/

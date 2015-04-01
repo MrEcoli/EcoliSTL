@@ -65,16 +65,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="UnitTest\vector_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="algorithm.h" />
     <ClInclude Include="allocator.h" />
     <ClInclude Include="construct.h" />
     <ClInclude Include="iterator.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="sub_alloc.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="_type_trait.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

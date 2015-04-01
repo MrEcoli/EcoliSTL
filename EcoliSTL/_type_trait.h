@@ -3,7 +3,7 @@
 //利用偏特化 Partial specialization 进行类型信息萃取
 
 
-namespace EcoliSTL{
+namespace EcSTL{
 
 	struct _true_type{};
 	struct _false_type{};

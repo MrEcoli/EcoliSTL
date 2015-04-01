@@ -4,7 +4,7 @@
 #include "_type_trait.h"
 #include <crtdefs.h>
 
-namespace EcoliSTL{
+namespace EcSTL{
 
 	template <class Category, class T, class Distance = ptrdiff_t, class Pointer = T*, class Reference = T&>
 	struct iterator{

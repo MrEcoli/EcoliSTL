@@ -5,7 +5,7 @@
 #include "_type_trait.h"
 #include <sys\utime.h>
 
-namespace EcoliSTL{
+namespace EcSTL{
 
 	//为什么这里会有个T2呢？？
 	template<typename T1, typename T2>
@@ -41,10 +41,12 @@ namespace EcoliSTL{
 
 
 
-
+	//调用不同版本的析构函数
 	template<typename T>
 	inline void destroy(T* ptr){
-		ptr->~T();
+		if (ptr){
+			ptr->~T();
+		}
 	}
 
 	template<typename ForwardIterator>
@@ -73,7 +75,42 @@ namespace EcoliSTL{
 	inline void __destroy_aux(ForwardIterator first, ForwardIterator last, _true_type x) {}
 
 
+	//参数为两个指针的destroy函数；
+
+	template<class ForwardIterator, class Distance>
+		inline void destory(ForwardIterator iter, Distance dis){
+		_destroy(iter, dis, value_type(iter));
+	}
+
+	template<class ForwardIterator, class Distance, class T>
+	inline void _destroy(ForwardIterator iter, Distance dis, T*){
+		typedef typename _type_trait<T>::has_trivial_default_destructor desturctor;
+		__destroy_aux(iter, dis, desturctor());
+	}
+
+	template<class ForwardIterator, class Distance>
+	inline void __destroy_aux(ForwardIterator iter, Distance dis, _true_type){}
+
+	template<class ForwardIterator, class Distance>
+	inline void __destroy_aux(ForwardIterator iter, Distance dis, _false_type){
+		Distance n = 0;
+		for (; n != dis; ++n, ++iter) {
+			destory(&*iter);
+		}
+	}
+
+
+
+
+
+
+
+
+
 	//针对char与wchar的特化版本， _type_trait中并未特化char与wchar
+
+
+
 
 	inline void destroy(char*, char*){}
 
