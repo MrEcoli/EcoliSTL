@@ -24,6 +24,9 @@
     <ClCompile Include="UnitTest\vector_test.cpp">
       <Filter>UnitTest</Filter>
     </ClCompile>
+    <ClCompile Include="UnitTest\list_test.cpp">
+      <Filter>UnitTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="_type_trait.h">
@@ -51,6 +54,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="list.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTest\hashmap.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -67,6 +67,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UnitTest\vector_test.cpp" />
+    <ClCompile Include="UnitTest\list_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="algorithm.h" />
@@ -76,6 +77,7 @@
     <ClInclude Include="iterator.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="sub_alloc.h" />
+    <ClInclude Include="UnitTest\hashmap.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="_type_trait.h" />
   </ItemGroup>

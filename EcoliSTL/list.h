@@ -198,7 +198,7 @@ namespace EcSTL{
 
 
 		void splice(iterator position, list<T, Alloc>& others){
-			if (!empty ()){
+			if (!others.empty ()){
 				transfer(position, others.begin(), others.end());
 			}
 		}
@@ -309,19 +309,19 @@ namespace EcSTL{
 		void transfer(iterator position, iterator first, iterator last){
 			link_type first_node = first.ptr_to_node;
 			//这里的last_node指向transfer的最后一个节点，不是前闭后开型
-			link_type last_node = last.ptr_to_node->prev;
+			link_type last_node = last.ptr_to_node;
 			link_type insert_pos = position.ptr_to_node;
 			link_type prev_insert = insert_pos->prev;
 
 			//如果postion == last，那么下面的工作是不必要进行的;
 			//实际上更改了了6个链接，同时需要一个变量保存position之前的位置,tmp
-			if (position != last){
-				first_node->prev->next = last_node->next;
-				last_node->next->prev = first_node->prev;
+			if (position != last && first != last){
+				last_node->prev->next = insert_pos;
+				first_node->prev->next = last_node;
 				prev_insert->next = first_node;
+				insert_pos->prev = last_node->prev;
+				last_node->prev = first_node->prev;
 				first_node->prev = prev_insert;
-				last_node->next = insert_pos;
-				insert_pos->prev = last_node;
 			}
 		}
 
@@ -483,7 +483,7 @@ namespace EcSTL{
 		}
 
 		for (int i = 1; i < fill; ++i) {
-			tmp_list.merge(list_arr[i]);
+			list_arr[i].merge(list_arr[i-1]);
 		}
 
 		swap(list_arr[fill - 1]);
