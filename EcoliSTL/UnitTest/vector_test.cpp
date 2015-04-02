@@ -1,3 +1,4 @@
+/*
 #include "..\vector.h"
 #include <iostream>
 #include <limits.h>
@@ -89,3 +90,4 @@ int main(){
 }
 
 
+*/

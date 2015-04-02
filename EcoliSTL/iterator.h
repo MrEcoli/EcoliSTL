@@ -130,6 +130,19 @@ namespace EcSTL{
 	inline void _advance(InputIterator &iter, Distance n, random_access_iterator_tag){
 		iter += n;
 	}
+	
+	template<class InputIterator>
+	inline InputIterator next(InputIterator iter){
+		return ++iter;
+	}
+
+	template<class InputIterator>
+	inline InputIterator prev(InputIterator iter){
+		return --iter;
+	}
+
+
+
 }
 
 #endif

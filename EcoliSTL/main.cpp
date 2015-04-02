@@ -1,34 +1,86 @@
-﻿/*
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 #include <new>
 #include "vector.h"
-
-
+#include "functional.h"
+#include "list.h"
+using std::cout;
+using std::endl;
 
 
 int main(){
 
 
-	EcoliSTL::vector<int> vec1;
+	EcSTL::greater<int> f;
+
+	//没有数据成员的类的大小为1；
+	cout << (sizeof f) << endl;
 
 
 
-	vec1.insert(vec1.begin (), 10, 10);
+	//test constuctor 
+	EcSTL::list<int> alist, blist(3, 1);
 
-	vec1.print();
+
+	for (int i = 1; i != 11; ++i) {
+		if(i&1){alist.push_back(i);}
+	}
+
+	for (int i = 1; i != 12; ++i) {
+		if (i&1){continue;}
+		blist.push_back(i);
+	}
+
+	alist.print();
+	alist.pop_back();
+	alist.print();
+	blist.print();
+	alist.splice(alist.begin(), blist.begin ());
+	alist.print();
+
+	alist.merge(blist);
 	
-	EcoliSTL::vector<int> vec2 = vec1;
+	alist.print();
 
-	vec2.print();
+	cout << alist.size() << endl;
+	cout << blist.size() << endl;
+	cout << *(alist.begin()) << endl;
+	cout << alist.front() << endl;
+	cout << alist.back() << endl;
 
+	alist.pop_back();
+	alist.pop_back();
+	alist.pop_back();
+	alist.pop_front();
+	alist.pop_front();
+	alist.pop_front();
+	alist.pop_front();
 
+	alist.print();
+	blist.push_back(13);
+
+	alist.print();
+	blist.print();
+
+	alist.swap(blist);
 	
 
+	blist.print();
+	alist.print();
+	alist.splice(alist.end(), blist);
+	alist.print();
+		
+	alist.sort();
+	cout << "sorting" << endl;
+	alist.print();
 
 
 
-	std::cout << "ending" << std::endl;
+
+	cout << "ending" << endl;
+	cout << "*******************************" << endl;
+	
+	
 	std::cin.get();
 	return 0;
-}*/
+}

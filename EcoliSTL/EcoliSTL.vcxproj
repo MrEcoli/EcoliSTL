@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B04139EF-F4F6-4FD5-B32B-173EB88EE242}</ProjectGuid>
     <RootNamespace>EcoliSTL</RootNamespace>
+    <ProjectName>EcSTL</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -71,7 +72,9 @@
     <ClInclude Include="algorithm.h" />
     <ClInclude Include="allocator.h" />
     <ClInclude Include="construct.h" />
+    <ClInclude Include="functional.h" />
     <ClInclude Include="iterator.h" />
+    <ClInclude Include="list.h" />
     <ClInclude Include="sub_alloc.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="_type_trait.h" />

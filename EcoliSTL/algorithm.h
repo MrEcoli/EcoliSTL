@@ -39,6 +39,8 @@ namespace EcSTL{
 		return result;
 	}
 
+
+
 }
 
 
