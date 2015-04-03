@@ -1,17 +1,21 @@
-﻿生成启动时间为 2015/4/2 23:12:24。
+﻿生成启动时间为 2015/4/3 20:26:32。
      1>项目“C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\EcoliSTL\EcoliSTL.vcxproj”在节点 2 上(Build 个目标)。
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(388,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (EcoliSTL.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt UnitTest\list_test.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /FR"Debug\\" /Gd /TP /analyze- /errorReport:prompt main.cpp UnitTest\vector_test.cpp UnitTest\list_test.cpp
          list_test.cpp
-     1>c:\users\liangquan\documents\visual studio 2013\projects\ecolistl\ecolistl\unittest\list_test.cpp(14): warning C4101: “f”: 未引用的局部变量
+         vector_test.cpp
+         main.cpp
+         正在生成代码...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\Debug\EcSTL.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\Debug\EcSTL.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\Debug\EcSTL.lib" /MACHINE:X86 Debug\main.obj
          Debug\vector_test.obj
          Debug\list_test.obj
          EcoliSTL.vcxproj -> C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\Debug\EcSTL.exe
+       BscMake:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\bscmake.exe /nologo /o"C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\Debug\EcSTL.bsc" /n Debug\main.sbr Debug\vector_test.sbr Debug\list_test.sbr
      1>已完成生成项目“C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\EcoliSTL\EcoliSTL.vcxproj”(Build 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:00.96
+已用时间 00:00:01.56

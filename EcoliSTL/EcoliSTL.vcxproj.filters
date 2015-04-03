@@ -15,6 +15,8 @@
     </Filter>
     <Filter Include="UnitTest">
       <UniqueIdentifier>{cfcccff3-7fed-4703-a154-34d76c7ca8c7}</UniqueIdentifier>
+      <Extensions>
+      </Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -56,12 +58,14 @@
     <ClInclude Include="list.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="UnitTest\hashmap.h">
+    <ClInclude Include="stl_hash_function.h">
       <Filter>头文件</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
+    <ClInclude Include="hashtable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="deque.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

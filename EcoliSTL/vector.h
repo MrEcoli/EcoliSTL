@@ -199,7 +199,17 @@ namespace EcSTL{
 
 		void print()const;
 
+		void reverse(){
+			if (empty () || size () == 1){
+				return;
+			}
+			iterator first = begin();
+			iterator last = --end();
 
+			while (first < last) {
+				swap(*first, *last);
+			}
+		}
 	};
 	//insert_aux 在目的位置插入一个对象；
 	template<class T, class Alloc>

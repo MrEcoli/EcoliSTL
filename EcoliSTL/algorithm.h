@@ -1,5 +1,8 @@
 #ifndef _ECOLISTL_ALGORITHM_H
 #define _ECOLISTL_ALGORITHM_H
+#include <xutility>
+
+
 
 namespace EcSTL{
 
@@ -23,9 +26,9 @@ namespace EcSTL{
 
 	template<class T>
 	void swap(T& lhs, T& rhs){
-		T tmp = T(lhs);
-		lhs = rhs;
-		rhs = tmp;
+		T tmp = T(std::move());
+		lhs = std::move(rhs);
+		rhs = std::move(T);
 	}
 
 	template<class BidrecIterator1, class BidrecIterator2>
