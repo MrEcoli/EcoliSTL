@@ -42,6 +42,18 @@ namespace EcSTL{
 		return result;
 	}
 
+	template<class T, class Cmp = greater<T>>
+	T& max(const T& v1, const T& v2){
+
+		Cmp cp = Cmp();
+
+		if (cp(v1, v2)){
+			return v1;
+		}
+		else{
+			return v2;
+		}
+	}
 
 
 }

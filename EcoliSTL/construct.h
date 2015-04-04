@@ -131,7 +131,7 @@ namespace EcSTL{
 
 	template<class InputIterator, class ForwardIterator>
 	inline ForwardIterator _uninitialized_copy_aux(InputIterator first, InputIterator last, ForwardIterator out, _true_type){
-		for (; first != last; first++, out++){
+		for (; first != last; ++first, ++out){
 			*out = *first;
 		}
 		return out;
@@ -159,7 +159,7 @@ namespace EcSTL{
 	inline void _uninitialized_fill_aux(ForwardIterator first, ForwardIterator last, const T& v, _false_type){
 		while (first != last){
 			construct(&*first, v);
-			first++;
+			++first;
 		}
 	}
 
@@ -167,7 +167,7 @@ namespace EcSTL{
 	inline void _uninitialized_fill_aux(ForwardIterator first, ForwardIterator last, const T& v, _true_type){
 		while (first != last){
 			*first = v;
-			first++;
+			++first;
 		}
 	}
 
@@ -184,9 +184,9 @@ namespace EcSTL{
 	inline void _uninitialized_fill_n_aux(ForwardIterator first, Distance dis, const T& v, _false_type){
 		Distance size = 0;
 		while (size != dis) {
-			size++;
+			++size;
 			construct(&*first, v);
-			first++;
+			++first;
 		}
 	}
 
@@ -194,9 +194,9 @@ namespace EcSTL{
 	inline void _uninitialized_fill_n_aux(ForwardIterator first, Distance dis, const T& v, _true_type){
 		Distance size = 0;
 		while (size != dis) {
-			size++;
+			++size;
 			*first = v;
-			first++;
+			++first;
 		}
 	}
 
