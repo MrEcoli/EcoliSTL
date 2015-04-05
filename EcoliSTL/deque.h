@@ -106,21 +106,29 @@ namespace EcSTL{
 		}
 
 		//返回引用类型, 可以重复赋值
-		iterator& operator+=(difference_type dif){
-			if (dif + cur < last && dif + cur >= first){
-				cur += dif;
+		iterator& operator+=(difference_type n){
+
+			difference_type offset = n + (cur - first);
+			difference_type node_offset = 0;
+
+			if (offset >= 0 && offset <(difference_type)(buffer_sz())){
+				cur += n;
 				return *this;
+			}
+			else if (offset < 0){
+				node_offset = (offset + 1) / (difference_type(buffer_sz())) - 1;
 			}
 			else{
-				difference_type offset = dif + (cur - first);
-				difference_type node_offset = offset >= 0 ? offset / buffer_sz() : ((offset + 1) / buffer_sz() - 1);
-				set_node(node + node_offset);
-				cur = first + (dif - node_offset* buffer_sz());
-				return *this;
+				node_offset = offset / (difference_type(buffer_sz()));
 			}
+
+			set_node(node + node_offset);
+			
+			cur = first + (offset - node_offset *(difference_type(buffer_sz())));
+			return *this;
 		}
 
-		iterator& operator-=(difference_type dif){
+		iterator& operator-=(difference_type n){
 			return this->operator+=(-n);
 		}
 
@@ -222,7 +230,26 @@ namespace EcSTL{
 
 		//constructor
 
-		deque(){}
+		deque(){
+			creat_map_and_node(0);
+		}
+
+		//assignment operator
+
+		self& operator=(const self& rhs){
+			size_type n = rhs.size();
+			self tmp;
+			tmp.creat_map_and_node(n);
+			copy(rhs.begin(), rhs.end(), tmp.begin());
+			this->swap(tmp);
+			return *this;
+		}
+
+		deque(const self& others){
+			size_type n = others.size();
+			creat_map_and_node(n);
+			copy(others.begin(), others.end(), begin());
+		}
 
 
 		//destructor
@@ -313,13 +340,11 @@ namespace EcSTL{
 
 		}
 
-		void insert(iterator postion, const T& _val){
 
-		};
 
 		void swap(deque<T, Alloc, BufSize>& rhs){
-			start.swap(rhs.swap);
-			finish.swap(rhs.swap);
+			start.swap(rhs.start);
+			finish.swap(rhs.finish);
 			EcSTL::swap(map, rhs.map);
 			EcSTL::swap(map_size, rhs.map_size);
 		}
@@ -336,10 +361,12 @@ namespace EcSTL{
 			difference_type dis = position - start;
 
 			//destroy the target at the position
-			data_allocator::destroy(&*postion);
+			//no need, in the copy function, assignment operator will be used, the object will destruct at that time
+			//data_allocator::destroy(&*postion);
+
 			//choose whether move the front part or back part of the deque
 			//if distance of postion to start is father than half the size of deque, we choose to move the back part of the deque use copy forward
-			if (dis > (size()>>1)){
+			if (dis > (size() >> 1)){
 				copy(next, finish, position);
 				pop_back();
 			}
@@ -354,6 +381,32 @@ namespace EcSTL{
 
 		//erase a area;
 		iterator erase(iterator pos_start, iterator pos_end);
+
+
+		iterator insert(iterator pos, const value_type& val){
+
+			if (pos == start){
+				push_front(val);
+				return start;
+			}
+			else if (pos == finish){
+				push_back(val);
+				iterator tmp = finish;
+				return --tmp;
+			}
+			else{
+				return insert_aux(pos, val);
+			}
+
+		}
+
+
+		iterator insert_aux(iterator pos, const value_type& val);
+
+
+		
+
+
 
 	protected:
 		//最少管理多少块内存块
@@ -404,6 +457,8 @@ namespace EcSTL{
 		}
 
 		void reallocate_map(size_type n, bool isFront);
+
+
 
 	};
 
@@ -534,16 +589,18 @@ namespace EcSTL{
 	//print the deque, not the standard port of STL deque
 	template<class T, class A, size_t BufSize>
 	void deque<T, A, BufSize>::print() const {
+
 		for (iterator it = begin(); it != end(); ++it) {
 			cout << (*it) << " ";
 		}
+
 		cout << endl;
 	}
 
 	//clear the deque, destroy all the objects and deallocate the resource
 	template<class T, class A, size_t BufSize>
 	void deque<T, A, BufSize>::clear(){
-		
+
 		for (map_pointer cur_node = start.node + 1; cur_node < finish.node; ++cur_node){
 			destroy(*cur_node, *cur_node + buf_sz());
 			data_allocator::deallocate(*cur_node, buf_sz());
@@ -565,12 +622,74 @@ namespace EcSTL{
 
 	//erase a area indiacte by two iterator
 	template<class T, class A, size_t BufSize>
-	iterator deque<T, A, BufSize>::erase(iterator pos_start, iterator pos_end){
-		size_type front_size = pos_start - start;
-		size_type back_size = finish - pos_end;
+	typename deque<T, A, BufSize>::iterator deque<T, A, BufSize>::erase(iterator pos_start, iterator pos_end){
+		//size of erase area;
+		size_type n = pos_end - pos_start;
+
+		size_type front_sz = pos_start - start;
+		size_type back_sz = finish - pos_end;
 
 
+		//Global function
 
+		//choose which direction we move the deque;
+		if (front_sz > back_sz){
+			//move the element use copy function
+			copy(pos_end, finish, pos_start);
+			iterator new_finish = finish - n;
+
+			//destroy the no use area;
+			destroy(new_finish, finish);
+
+			//deallocate the unuse memory;
+			for (map_pointer cur_node = new_finish.node + 1; cur_node <= finish.node; ++cur_node) {
+				data_allocator::deallocate(*cur_node, buf_sz());
+			}
+			new_finish = finish;
+		}
+		else{
+			copy_reverse(start, pos_start, pos_end);
+			iterator new_start = start + n;
+			destroy(start, new_start);
+
+			for (map_pointer cur_node = start.node; cur_node < new_start.node; ++cur_node) {
+				data_allocator::deallocate(*cur_node, buf_sz());
+			}
+		}
+
+		return start + front_sz;
+	}
+
+
+	//if insert position is located "in the deque"
+	template<class T, class A, size_t BufSize>
+	typename deque<T, A, BufSize>::iterator deque<T, A, BufSize>::insert_aux(iterator pos, const value_type& val){
+		size_type start_dis = pos - start;
+		size_type finish_dis = finish - pos;
+
+		//remember the index of insert position in the deque, because the push operator may result the change of data member node of the iterator;
+		difference_type index = pos - start;
+
+		//make choose which part to copy
+
+		if (start_dis > finish_dis){
+			push_back(back());
+			iterator old_finish = prev(finish);
+			copy_reverse(start + index, old_finish, finish);
+			pos = start + index;
+		}
+		else{
+			push_front(front());
+			print();
+			iterator old_start = start;
+			old_start++;
+
+			copy(old_start, old_start + index, start);
+			pos = start + index;
+		}
+
+		*pos = val;
+		return pos;
 	}
 
 }

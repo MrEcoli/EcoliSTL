@@ -14,6 +14,7 @@ namespace EcSTL{
 		return out;
 	}
 
+
 	template<class ForwardIterator1, class  ForwardIterator2>
 	bool equal(ForwardIterator1 first, ForwardIterator2 last, ForwardIterator2 others){
 		for (; first != last; ++others, ++first) {
@@ -26,9 +27,9 @@ namespace EcSTL{
 
 	template<class T>
 	void swap(T& lhs, T& rhs){
-		T tmp = T(std::move());
+		T tmp = (std::move(lhs));
 		lhs = std::move(rhs);
-		rhs = std::move(T);
+		rhs = std::move(tmp);
 	}
 
 	//source area is [first, last), target area is [result - (last - first), result);
