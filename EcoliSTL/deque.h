@@ -1,4 +1,4 @@
-#ifndef _ECSTL_DEQUE_H
+ï»¿#ifndef _ECSTL_DEQUE_H
 #define _ECSTL_DEQUE_H
 #include "construct.h"
 #include "algorithm.h"
@@ -6,9 +6,9 @@
 #include "iterator.h"
 #include "_type_trait.h"
 
-//dequeÊÇÒ»ÖÖ£¬Í¨¹ıÒ»¸ö¡°map¡±£¬½«¶à¸öÄÚ´æ¿é»º³åÇøÄ£Äâ³ÉÒ»¸öÕûÌåµÄÊı×éµÄÊı¾İ½á¹¹
-//ËüµÄÓÅµãÊÇÊÊºÏÔÚÍ·Î²½øĞĞÉ¾³ıÔö¼Ó£¬Ê±¼ä¸´ÔÓ¶ÈÎªO(1)£¬Í¬Ê±ÓÖÓëvectorÀàËÆ£¬²»ÊÊºÏÔÚÖĞ¼ä½øĞĞ²åÈëÊı¾İ£¬Ê±¼ä¸´ÔÓ¶ÈÎªO(n)
-//ËüµÄiteratorµÄtagËäÈ»Îªrandom_accesss£¬µ«ÊÇĞèÒªÎ¬»¤µÄ³É±¾ÊÇ½Ï¸ßµÄ¡£
+//dequeæ˜¯ä¸€ç§ï¼Œé€šè¿‡ä¸€ä¸ªâ€œmapâ€ï¼Œå°†å¤šä¸ªå†…å­˜å—ç¼“å†²åŒºæ¨¡æ‹Ÿæˆä¸€ä¸ªæ•´ä½“çš„æ•°ç»„çš„æ•°æ®ç»“æ„
+//å®ƒçš„ä¼˜ç‚¹æ˜¯é€‚åˆåœ¨å¤´å°¾è¿›è¡Œåˆ é™¤å¢åŠ ï¼Œæ—¶é—´å¤æ‚åº¦ä¸ºO(1)ï¼ŒåŒæ—¶åˆä¸vectorç±»ä¼¼ï¼Œä¸é€‚åˆåœ¨ä¸­é—´è¿›è¡Œæ’å…¥æ•°æ®ï¼Œæ—¶é—´å¤æ‚åº¦ä¸ºO(n)
+//å®ƒçš„iteratorçš„tagè™½ç„¶ä¸ºrandom_accesssï¼Œä½†æ˜¯éœ€è¦ç»´æŠ¤çš„æˆæœ¬æ˜¯è¾ƒé«˜çš„ã€‚
 
 
 namespace EcSTL{
@@ -17,7 +17,7 @@ namespace EcSTL{
 	template<class T, class Ref = T&, class Ptr = T*, size_t BufSize = 0>
 	class _deque_iterator{
 	public:
-		//ĞÍ±ğÉùÃ÷
+		//å‹åˆ«å£°æ˜
 		typedef _deque_iterator<T, T&, T*, BufSize> iterator;
 		typedef random_access_iterator_tag iterator_category;
 		typedef size_t size_type;
@@ -30,19 +30,19 @@ namespace EcSTL{
 
 		static size_t buffer_sz(){ return _deque_buf_size(BufSize, sizeof(T)); }
 
-		//µ±Ç°iteratorÖ¸ÏòµÄÎ»ÖÃµÄÖ¸Õë
+		//å½“å‰iteratoræŒ‡å‘çš„ä½ç½®çš„æŒ‡é’ˆ
 		pointer cur;
 
-		//µ±Ç°ËùÔÚÇø¿éµÄÄÚ´æÍ·Î²Ö¸Õë
+		//å½“å‰æ‰€åœ¨åŒºå—çš„å†…å­˜å¤´å°¾æŒ‡é’ˆ
 		pointer first;
 		pointer last;
 
-		//ËùÔÚµÄdequeµÄmap_pointer
+		//æ‰€åœ¨çš„dequeçš„map_pointer
 
 		map_pointer node;
 
-		//ÖØĞÂÉèÖÃiteratorËùÖ¸ÏòµÄÄÚ´æ¿é
-		//ÔÚoperator++£¬ operator--ÖĞÈç¹û´æÔÚ¿çÄÚ´æÇø¿éµÄĞĞÎªÊ±Ê¹ÓÃ
+		//é‡æ–°è®¾ç½®iteratoræ‰€æŒ‡å‘çš„å†…å­˜å—
+		//åœ¨operator++ï¼Œ operator--ä¸­å¦‚æœå­˜åœ¨è·¨å†…å­˜åŒºå—çš„è¡Œä¸ºæ—¶ä½¿ç”¨
 		void set_node(map_pointer new_node){
 			node = new_node;
 			first = *new_node;
@@ -50,24 +50,36 @@ namespace EcSTL{
 		}
 
 
-		
-		
-		//random_access_iteratorµÄÖ®¼äÄÜ¹»Ö±½Ó¼ÆËã¾àÀë
-		//Á½¸öiteratorÖ®¼äµÄ¾àÀëÓÉËûÃÇÔÚ¸÷×ÔµÄÄÚ´æÇøÓòÖĞµÄÎ»ÖÃ£¬ÒÔ¼°ËûÃÇËù´¦ÄÚ´æ¿éÔÚmapÁĞ±íÖĞµÄ¾àÀë¹²Í¬¾ö¶¨
-		difference_type operator-(const iterator& rhs)const{
-			return ((difference_type)buffer_sz())(this->node - rhs->node - 1) + (first - cur) + (rhs->last - rhs->cur);
+
+		//operator =
+		_deque_iterator& operator=(const _deque_iterator& rhs){
+			node = rhs.node;
+			first = rhs.first;
+			last = rhs.last;
+			cur = rhs.cur;
+			return *this;
 		}
-		
-		//µü´úÆ÷Ç°½ø/ÍËºóÒ»Î»£¬ĞèÒª¿¼ÂÇµÄÊÇ£¬Èç¹ûcurÖ¸ÏòÄÚ´æ¿é½áÊø»òÊÇfirstÖ®Ç°£¬ĞèÒªset_node
+
+
+		//random_access_iteratorçš„ä¹‹é—´èƒ½å¤Ÿç›´æ¥è®¡ç®—è·ç¦»
+		//ä¸¤ä¸ªiteratorä¹‹é—´çš„è·ç¦»ç”±ä»–ä»¬åœ¨å„è‡ªçš„å†…å­˜åŒºåŸŸä¸­çš„ä½ç½®ï¼Œä»¥åŠä»–ä»¬æ‰€å¤„å†…å­˜å—åœ¨mapåˆ—è¡¨ä¸­çš„è·ç¦»å…±åŒå†³å®š
+		difference_type operator-(const iterator& rhs)const{
+
+			return ((difference_type)buffer_sz())*(node - rhs.node - 1) + (cur - first) + (rhs.last - rhs.cur);
+
+
+		}
+
+		//è¿­ä»£å™¨å‰è¿›/é€€åä¸€ä½ï¼Œéœ€è¦è€ƒè™‘çš„æ˜¯ï¼Œå¦‚æœcuræŒ‡å‘å†…å­˜å—ç»“æŸæˆ–æ˜¯firstä¹‹å‰ï¼Œéœ€è¦set_node
 		iterator& operator++(){
 			++cur;
 			if (cur == last){
-				set_node(node+1);
+				set_node(node + 1);
 				cur = first;
 			}
 			return *this;
 		}
-		
+
 		iterator operator++(int){
 			iterator tmp = *this;
 			this->operator++();
@@ -77,7 +89,7 @@ namespace EcSTL{
 
 		iterator& operator--(){
 			if (cur == first){
-				set_node(node-1);
+				set_node(node - 1);
 				cur = last - 1;
 				return *this;
 			}
@@ -92,8 +104,8 @@ namespace EcSTL{
 			this->operator--();
 			return tmp;
 		}
-		
-		//·µ»ØÒıÓÃÀàĞÍ, ¿ÉÒÔÖØ¸´¸³Öµ
+
+		//è¿”å›å¼•ç”¨ç±»å‹, å¯ä»¥é‡å¤èµ‹å€¼
 		iterator& operator+=(difference_type dif){
 			if (dif + cur < last && dif + cur >= first){
 				cur += dif;
@@ -112,8 +124,8 @@ namespace EcSTL{
 			return this->operator+=(-n);
 		}
 
-		//ÒòÎªÎ´¸Ä±äÔ­Ê¼¶ÔÏó£¬ËùÒÔ¿ÉÒÔÖØÔØÎªconst
-		//·µ»ØÀàĞÍÊÇÒ»¸öÓÒÖµ£¬ËùÒÔ²»ÊÇÒıÓÃÀàĞÍµÄ
+		//å› ä¸ºæœªæ”¹å˜åŸå§‹å¯¹è±¡ï¼Œæ‰€ä»¥å¯ä»¥é‡è½½ä¸ºconst
+		//è¿”å›ç±»å‹æ˜¯ä¸€ä¸ªå³å€¼ï¼Œæ‰€ä»¥ä¸æ˜¯å¼•ç”¨ç±»å‹çš„
 		iterator operator-(difference_type n)const{
 			iterator tmp = *this;
 			return tmp -= n;
@@ -135,7 +147,7 @@ namespace EcSTL{
 		bool operator!=(const iterator& rhs)const{
 			return cur != rhs.cur;
 		}
-		
+
 		bool operator<(const iterator& rhs)const{
 			return node < rhs.node || (node == rhs.node && cur < rhs.cur);
 		}
@@ -149,7 +161,7 @@ namespace EcSTL{
 			return node > rhs.node || (node == rhs.node && cur >= rhs.cur);
 		}
 
-		reference operator*(){ return *cur;}
+		reference operator*(){ return *cur; }
 		pointer operator->(){ return cur; }
 
 		void swap(iterator& rhs){
@@ -162,14 +174,14 @@ namespace EcSTL{
 
 	};
 
-	//Ò»¸öÈ«¾Öº¯Êı£¬Í¨¹ı¸ø¶¨µÄÄ£°å·ÇĞÍ±ğ²ÎÊıBufSizeÈ·¶¨dequeµÄÄÚ´æ¿éµÄ´óĞ¡£¬BufSizeÄ¬ÈÏÎª0£¬ÄÚ´æ¿éÄ¬ÈÏ´óĞ¡Îª512bytes£¬·µ»ØÄÚ´æ¿éÖĞ¿ÉÒÔ·ÅÖÃ¶àÉÙ¸ö´æ´¢µÄ¶ÔÏó
-	//Èç¹û¶ÔÏó´óĞ¡³¬¹ı512,Ôò·ÅÖÃÒ»¸ö¶ÔÏó
+	//ä¸€ä¸ªå…¨å±€å‡½æ•°ï¼Œé€šè¿‡ç»™å®šçš„æ¨¡æ¿éå‹åˆ«å‚æ•°BufSizeç¡®å®šdequeçš„å†…å­˜å—çš„å¤§å°ï¼ŒBufSizeé»˜è®¤ä¸º0ï¼Œå†…å­˜å—é»˜è®¤å¤§å°ä¸º512bytesï¼Œè¿”å›å†…å­˜å—ä¸­å¯ä»¥æ”¾ç½®å¤šå°‘ä¸ªå­˜å‚¨çš„å¯¹è±¡
+	//å¦‚æœå¯¹è±¡å¤§å°è¶…è¿‡512,åˆ™æ”¾ç½®ä¸€ä¸ªå¯¹è±¡
 	inline size_t _deque_buf_size(size_t n, size_t sz){
 		return n != 0 ? n : (sz >= 512 ? 1 : (512 / sz));
 	}
 
 
-	//µÚÈı¸ö·ÇĞÍ±ğ²ÎÊı±íÊ¾»º³åÇøµÄ´óĞ¡
+	//ç¬¬ä¸‰ä¸ªéå‹åˆ«å‚æ•°è¡¨ç¤ºç¼“å†²åŒºçš„å¤§å°
 	template<class T, class Alloc = allocator<T>, size_t BufSize = 0>
 	class deque{
 	public:
@@ -180,31 +192,31 @@ namespace EcSTL{
 		typedef ptrdiff_t difference_type;
 		typedef _deque_iterator<T, T&, T*, BufSize> iterator;
 		typedef deque<T, Alloc, BufSize> self;
-		
+
 	protected:
 
-		//Êı¾İ³ÉÔ±ÓëĞÔ±ğÉùÃ÷£»
+		//æ•°æ®æˆå‘˜ä¸æ€§åˆ«å£°æ˜ï¼›
 
 		typedef pointer* map_pointer;
-		//Ö¸ÏòÄÚ´æÇø¿éµÄÖ¸ÕëµÄÖ¸Õë
+		//æŒ‡å‘å†…å­˜åŒºå—çš„æŒ‡é’ˆçš„æŒ‡é’ˆ
 		map_pointer map;
-		//Ö¸ÏòÄÚ´æÇø¿éµÄÖ¸ÕëµÄÊıÄ¿
+		//æŒ‡å‘å†…å­˜åŒºå—çš„æŒ‡é’ˆçš„æ•°ç›®
 		size_type map_size;
 
-		//Î¬»¤Á½¸öµü´úÆ÷£¬·Ö±ğÖ¸ÏòdequeµÄµÚÒ»¸ö»º³åÇøµÄµÚÒ»¸öÔªËØ£¬ÒÔ¼°×îºóÒ»¸ö»º³åÇøµÄ×îºóÒ»¸öÔªËØµÄÏÂÒ»¸öÎ»ÖÃ£¬Ç°±Õºó¿ª
+		//ç»´æŠ¤ä¸¤ä¸ªè¿­ä»£å™¨ï¼Œåˆ†åˆ«æŒ‡å‘dequeçš„ç¬¬ä¸€ä¸ªç¼“å†²åŒºçš„ç¬¬ä¸€ä¸ªå…ƒç´ ï¼Œä»¥åŠæœ€åä¸€ä¸ªç¼“å†²åŒºçš„æœ€åä¸€ä¸ªå…ƒç´ çš„ä¸‹ä¸€ä¸ªä½ç½®ï¼Œå‰é—­åå¼€
 		iterator start;
 		iterator finish;
 
-		//deque³ıÁËÒª½øĞĞ¶ÔÏóµÄ·ÖÅä£¬»¹Òª½øĞĞmapÖ¸ÕëÊı×éµÄ·ÖÅä
-		//Òò¶ø³ıÁË¸øÓèµÄÄ¬ÈÏµÄAllocÍâ£¬dequeĞèÒª¶¨ÒåÒ»¸ö·ÖÅämap_pointerµÄallocatorallocator
+		//dequeé™¤äº†è¦è¿›è¡Œå¯¹è±¡çš„åˆ†é…ï¼Œè¿˜è¦è¿›è¡ŒmapæŒ‡é’ˆæ•°ç»„çš„åˆ†é…
+		//å› è€Œé™¤äº†ç»™äºˆçš„é»˜è®¤çš„Allocå¤–ï¼Œdequeéœ€è¦å®šä¹‰ä¸€ä¸ªåˆ†é…map_pointerçš„allocatorallocator
 
 		typedef allocator<pointer> map_pointer_allocator;
 		typedef Alloc data_allocator;
 
-	public:	
+	public:
 
 		//constructor
-		deque(size_type n, const T& v):start(), finish(), map(0), map_size(0){
+		deque(size_type n, const T& v) :start(), finish(), map(0), map_size(0){
 			fill_initialize(n, v);
 		}
 
@@ -217,33 +229,35 @@ namespace EcSTL{
 
 		~deque(){
 
-			//µ÷ÓÃdestroy£¬Îö¹¹ËùÓĞµÄÈİÆ÷³ÉÔ±
+			//è°ƒç”¨destroyï¼Œææ„æ‰€æœ‰çš„å®¹å™¨æˆå‘˜
 			destroy(begin(), end());
-			//ÊÍ·ÅËùÓĞ·ÖÅäµÄÄÚ´æ¿é
+			//é‡Šæ”¾æ‰€æœ‰åˆ†é…çš„å†…å­˜å—
 			map_pointer cur;
 			for (cur = start.node; cur != finish.node; ++cur) {
 				data_allocator::deallocate(*cur, buf_sz());
 			}
-			
-			//ÊÍ·Å´æ´¢map_pointerµÄ¶¯Ì¬Êı×é
-			map_pointer_allocator::deallocate(map_pointer, map_size);
+
+			//é‡Šæ”¾å­˜å‚¨map_pointerçš„åŠ¨æ€æ•°ç»„
+			map_pointer_allocator::deallocate(map, map_size);
 
 		}
 
 
 
-		//³£ÓÃ½Ó¿Ú
+		//å¸¸ç”¨æ¥å£
 		iterator begin(){ return start; }
+		iterator begin()const{ return start; }
 		iterator end(){ return finish; }
+		iterator end()const{ return finish; }
 		reference front(){ return *start; }
 		reference back(){ return *(--end()); }
-		void size()const{ return end() - begin(); }
-		void empty()const{ return end() == begin(); }
+		size_type size()const{ return size_type(end() - begin()); }
+		bool empty()const{ return end() == begin(); }
 		reference operator[](size_type n){
 			return start[n];
 		}
 
-		//push_backÈç¹ûÔÚµ±Ç°ÄÚ´æÇø¿éÒÑ¾­ÂúÁËµÄÇé¿öÏÂ£¬ĞèÒªµ÷ÓÃpush_back_aux;
+		//push_backå¦‚æœåœ¨å½“å‰å†…å­˜åŒºå—å·²ç»æ»¡äº†çš„æƒ…å†µä¸‹ï¼Œéœ€è¦è°ƒç”¨push_back_aux;
 		void push_back(const value_type& val){
 			if (finish.last - 1 != finish.cur){
 				construct(finish.cur, val);
@@ -254,8 +268,27 @@ namespace EcSTL{
 			}
 		};
 
-		
 
+		//pop_back function, pop the last member of deque;
+		void pop_back(){
+			//pop_back need reconstruct the map array
+			if (finish.cur == finish.first){
+				data_allocator::deallocate(*(finish.node), buf_sz());
+				finish.set_node(finish.node - 1);
+				finish.cur = finish.last - 1;
+				data_allocator::destroy(finish.cur);
+			}
+			else{
+
+				finish.cur--;
+				data_allocator::destroy(finish.cur);
+
+			}
+
+		}
+
+
+		//push object at front of the deque;
 		void push_front(const value_type& val){
 			if (start.cur != start.first){
 				start.cur--;
@@ -267,9 +300,18 @@ namespace EcSTL{
 		}
 
 		void pop_front(){
+			if (start.cur == start.last - 1){
+				destory(start.cur, start.cur + 1);
+				data_allocator::deallocate(*(start.node), buf_sz());
+				start.set_node(start.node + 1);
+				start.cur = start.first;
+			}
+			else{
+				destory(start.cur, start.cur + 1);
+				start.cur++;
+			}
 
 		}
-		void pop_back();
 
 		void insert(iterator postion, const T& _val){
 
@@ -282,11 +324,42 @@ namespace EcSTL{
 			EcSTL::swap(map_size, rhs.map_size);
 		}
 
+		void print()const;
+
+		void clear();
+
+
+		//erase the object at the target
+		iterator erase(iterator position){
+			iterator next = position;
+			next++;
+			difference_type dis = position - start;
+
+			//destroy the target at the position
+			data_allocator::destroy(&*postion);
+			//choose whether move the front part or back part of the deque
+			//if distance of postion to start is father than half the size of deque, we choose to move the back part of the deque use copy forward
+			if (dis > (size()>>1)){
+				copy(next, finish, position);
+				pop_back();
+			}
+			else{
+				//here, we need move the element backward;
+				copy_reverse(start, position, next);
+				pop_front();
+			}
+			return start + dis;
+		}
+
+
+		//erase a area;
+		iterator erase(iterator pos_start, iterator pos_end);
+
 	protected:
-		//×îÉÙ¹ÜÀí¶àÉÙ¿éÄÚ´æ¿é
-		enum {_MIN_NODE_SIZE = 8};
-		enum {_DEFAULT_NODE_NUM = 512};
-		enum {_DEFAULT_INCR_SIZE = 2};
+		//æœ€å°‘ç®¡ç†å¤šå°‘å—å†…å­˜å—
+		enum { _MIN_NODE_SIZE = 8 };
+		enum { _DEFAULT_NODE_NUM = 512 };
+		enum { _DEFAULT_INCR_SIZE = 2 };
 
 		//
 
@@ -294,28 +367,28 @@ namespace EcSTL{
 			return BufSize != 0 ? BufSize : ((sizeof(T) > _DEFAULT_NODE_NUM ? 1 : (_DEFAULT_NODE_NUM / sizeof(T))));
 		}
 
-		//¹¹ÔìdequeµÄ´æ´¢¿Õ¼ä£¬¸ù¾İËù¸øÓèµÄ³õÊ¼»¯µÄdeque¶ÔÏó³ÉÔ±ÊıÄ¿Éè¶¨
+		//æ„é€ dequeçš„å­˜å‚¨ç©ºé—´ï¼Œæ ¹æ®æ‰€ç»™äºˆçš„åˆå§‹åŒ–çš„dequeå¯¹è±¡æˆå‘˜æ•°ç›®è®¾å®š
 		void creat_map_and_node(size_type n);
 
-		//¹¹ÔìºÍ³õÊ¼»¯Ò»¸ödeque
+		//æ„é€ å’Œåˆå§‹åŒ–ä¸€ä¸ªdeque
 		void fill_initialize(size_type n, const T& val);
 
-		//Èç¹ûĞèÒªÔÚĞÂµÄÄÚ´æ¿éÖĞ½øĞĞpush_back£¬Ôòµ÷ÓÃÒÔÏÂº¯Êı
+		//å¦‚æœéœ€è¦åœ¨æ–°çš„å†…å­˜å—ä¸­è¿›è¡Œpush_backï¼Œåˆ™è°ƒç”¨ä»¥ä¸‹å‡½æ•°
 		void push_back_aux(const value_type& val);
 
 		void push_front_aux(const value_type& val);
-		
+
 		void deallocate_map_pointer(map_pointer ptr, size_type n){
 			map_pointer_allocator::deallocate(ptr, n);
 		}
 
 
-		//ÔÚpush_back»òÊÇpush_front»òÊÇinsertÇé¿öÖĞÈç¹ûĞèÒªÀ©³ämap_sizeÊ±,µ÷ÓÃº¯Êıµ÷Õûmap_pointerÊı×é
+		//åœ¨push_backæˆ–æ˜¯push_frontæˆ–æ˜¯insertæƒ…å†µä¸­å¦‚æœéœ€è¦æ‰©å……map_sizeæ—¶,è°ƒç”¨å‡½æ•°è°ƒæ•´map_pointeræ•°ç»„
 		void reserve_map_at_back(size_type num_to_add = 1){
 
-			if (num_to_add > (map + map_size - 1 -finish.node)){
+			if (num_to_add > (size_type)(map + map_size - 1 - finish.node)){
 
-				reallocate_map(map_size + num_to_add, false);
+				reallocate_map(num_to_add, false);
 
 			}
 
@@ -323,34 +396,34 @@ namespace EcSTL{
 
 		void reserve_map_at_front(size_type num_to_add = 1){
 
-			if (num_to_add > (map - start.node)){
+			if (num_to_add > (size_type)(map - start.node)){
 
-				reallocate_map(map_size + num_to_add, true);
+				reallocate_map(num_to_add, true);
 			}
-
 
 		}
 
 		void reallocate_map(size_type n, bool isFront);
+
 	};
 
-	//¹¹½¨´æ´¢n¸ö¶ÔÏóµÄdeque¿Õ¼ä
-	//³õÊ¼»¯dequeµÄÊı¾İ³ÉÔ±
+
+	//allocate the heap memory for map_pointer array and n objects;
 
 	template<class T, class A, size_t BufSize>
 	void deque<T, A, BufSize>::creat_map_and_node(size_type n){
-		//Ã¿¸öÄÚ´æ¿éËùÄÜ·ÅÏÂµÄ¶ÔÏóÊıÄ¿
+		//æ¯ä¸ªå†…å­˜å—æ‰€èƒ½æ”¾ä¸‹çš„å¯¹è±¡æ•°ç›®
 		size_type bufsize = buf_sz();
 
-		//×îÉÙĞèÒª¶àÉÙ¸öÄÚ´æ¿é
+		//æœ€å°‘éœ€è¦å¤šå°‘ä¸ªå†…å­˜å—
 		size_type num_nodes = n / bufsize + 1;
-		//·ÖÅäÄÚ´æ¿éÖÁÉÙÎª_MIN_NODE_SIZE»òÊÇĞèÒªÄÚ´æ¿éÊıÄ¿+2;
+		//åˆ†é…å†…å­˜å—è‡³å°‘ä¸º_MIN_NODE_SIZEæˆ–æ˜¯éœ€è¦å†…å­˜å—æ•°ç›®+2;
 		map_size = (num_nodes + 2) > _MIN_NODE_SIZE ? (num_nodes + 2) : _MIN_NODE_SIZE;
 
-		//·ÖÅämap_pointerµÄ¶¯Ì¬Êı×é
+		//åˆ†é…map_pointerçš„åŠ¨æ€æ•°ç»„
 		map = (map_pointer)map_pointer_allocator::allocate(map_size);
-		
-		//½«dequeÊ¹ÓÃµÄÇø¶Î³õÊ¼»¯ÎªmapµÄÖĞ¼äÇøÓò
+
+		//å°†dequeä½¿ç”¨çš„åŒºæ®µåˆå§‹åŒ–ä¸ºmapçš„ä¸­é—´åŒºåŸŸ
 		map_pointer node_start = map + (map_size - num_nodes) / 2;
 		map_pointer node_end = node_start + num_nodes - 1;
 
@@ -366,48 +439,52 @@ namespace EcSTL{
 		finish.cur = finish.first + (n % bufsize);
 	}
 
-	//¹¹ÔìdequeÊı¾İ½á¹¹
-	//³õÊ¼»¯ÈİÆ÷ÄÚµÄ¶ÔÏó
+
+
+	//æ„é€ dequeæ•°æ®ç»“æ„
+	//åˆå§‹åŒ–å®¹å™¨å†…çš„å¯¹è±¡
 	template<class T, class A, size_t BufSize>
 	void deque<T, A, BufSize>::fill_initialize(size_type n, const T& val){
-		
+
 		creat_map_and_node(n);
 		uninitialized_fill(start, finish, val);
 
 	}
 
+
+
 	template<class T, class A, size_t BufSize>
 	void deque<T, A, BufSize>::reallocate_map(size_type num_add, bool isFront){
 
-		size_type old_sz = start.node - finish.node + 1;
+		size_type old_sz = finish.node - start.node + 1;
 
 		size_type new_sz = old_sz + num_add;
 
 		map_pointer new_start;
 
-		//Èç¹ûÔ­Ê¼µÄmapÊı×é´óĞ¡ÍêÈ«Âú×ãĞèÇó£¬Ôò¶ÔmapÊı×é½øĞĞµ÷Õû¼´¿É
+		//å¦‚æœåŸå§‹çš„mapæ•°ç»„å¤§å°å®Œå…¨æ»¡è¶³éœ€æ±‚ï¼Œåˆ™å¯¹mapæ•°ç»„è¿›è¡Œè°ƒæ•´å³å¯
 		if (map_size > new_sz * 2){
+
 			new_start = map + (map_size - new_sz) / 2 + (isFront ? num_add : 0);
 
-
-			//¸ù¾İnewstartµÄÎ»ÖÃÈ·¶¨´ÓÇ°»¹ÊÇ´Óºó¸´ÖÆ
+			//æ ¹æ®newstartçš„ä½ç½®ç¡®å®šä»å‰è¿˜æ˜¯ä»åå¤åˆ¶
 			if (new_start > start.node){
-				copy(start.node, finish.node, new_start);
+				copy(start.node, finish.node + 1, new_start);
 			}
 			else{
-				copy_reverse(start.node, finish.node, new_start);
+				copy_reverse(start.node, finish.node + 1, new_start);
 			}
 
 		}
-		//ÖØĞÂ·ÖÅämapÊı×é
+		//é‡æ–°åˆ†é…mapæ•°ç»„
 		else{
-			size_type new_map_size = map_size + max(map_size, num_add) + 2;
+			size_type new_map_size = map_size + (map_size > num_add ? map_size : num_add) + 2;
 
 			map_pointer new_map = (map_pointer)map_pointer_allocator::allocate(new_map_size);
 
-			new_start = new_map + (new_map_size - num_add) / 2 + (isFront ? num_add : 0);
+			new_start = new_map + (new_map_size - new_sz) / 2 + (isFront ? num_add : 0);
 
-			copy(start.node, finish.node, new_start);
+			copy(start.node, finish.node + 1, new_start);
 
 			map_pointer_allocator::deallocate(map, map_size);
 			map = new_map;
@@ -418,69 +495,83 @@ namespace EcSTL{
 		finish.set_node(new_start + old_sz - 1);
 	}
 
-	
-
-	
-
-
-
-
 
 
 	template<class T, class A, size_t BufSize>
 	void deque<T, A, BufSize>::push_back_aux(const value_type& val){
-		//Èç¹ûdequeµÄÄ©Î²ÒÑ¾­Ê¹ÓÃÍêÁËËùÓĞµÄÄÚ´æ¿é
-		if (map + map_size -1 == finish.node){
-			//Èç¹ûdequeµÄÇ°¶ÎµÄÄÚ´æÎ´Ê¹ÓÃÍê£¬Ôò½«ÄÚ´æ¿éÖ¸ÕëÇ°ÒÆ£»
-			//Ç°ÒÆÊ¹ÓÃcopy function, ÕıÏò¿½±´
-			if (map != start.node){
-				size_type offset = (map_size - (start.node - finish.node + 1)) / 2;
-				copy(start.node, finish.node, map + offset);
-				push_back_aux(val);
-			}
-			//Èç¹ûÇ°ºó¶¼Ã»ÓĞ¿Õ¼äÁË£¬ÔòÖØĞÂ¹¹ÔìÒ»¸ömap_pointerµÄÊı×é
-			else{
+		//no postion at the end of map, adjust the map array or reconstruct the map array
 
-				size_type new_size = map_size + (_DEFAULT_INCR_SIZE < 1 ? 2 : _DEFAULT_INCR_SIZE);
-				map_pointer new_map = (map_pointer)map_pointer_allocator::allocate(new_size);
+		reserve_map_at_back();
 
-				//star.nodeÏà¶ÔÓÚnew_mapµÄÆ«ÒÆ£¬³ıÒÔ2£¬¿ÉÊ¹Í·²¿Æ«ÒÆ½ÏĞ¡£¬¼´Ê¹Ö»Ôö´ó1Î»£¬ÕâÒ»Î»µÄÆ«ÒÆÒ²½«¸³ÓèÍ·²¿
+		//åˆ†é…æ–°çš„å†…å­˜å—
+		*(finish.node + 1) = (pointer)data_allocator::allocate(buf_sz());
 
-				size_type offset = (new_size - map_size) / 2;
-
-				//¸´ÖÆÔ­À´µÄmapÖ¸Õë
-				copy(start.node, finish.node, new_map + offset);
-
-				
-				//·µ»¹Ô­À´·ÖÅäµÄ¸ømap_pointerµÄ¶¯Ì¬Êı×é
-				map_pointer_allocator::deallocate(map, map_size);
-
-				//ÖØÖÃÊı¾İ³ÉÔ±
-
-				start.set_node(new_map + offset);
-				finish.set_node(start.node + map_size - 1);
-				map = new_map;
-				map_size = new_size;
-				push_back_aux(val);
-			}
-		}
-		//Èç¹ûÎ²²¿map_pointer£¬¿ÉÒÔÔÙ·ÖÅäÒ»¿éÄÚ´æ¸øÓèÕâ¸öÖ¸Õë
-		else{
-
-			construct(finish.cur, val);
-			*(map + map_size) = data_allocator::allocate(buf_sz());
-			
-			finish.set_node(*(map + map_size));
-
-
-
-		}
+		//åœ¨åŸæ¥çš„ä½ç½®ä¸Šæ„é€ å¯¹è±¡ï¼Œå› ä¸ºæ˜¯å‰é—­åå¼€ï¼Œfinish.curæŒ‡å‘çš„ä½ç½®æ—¶æœªæ„é€ å…ƒç´ çš„
+		construct(finish.cur, val);
+		//é‡æ–°è®¾å®šfinish
+		finish.set_node(finish.node + 1);
+		finish.cur = finish.first;
 
 	}
 
+	template<class T, class A, size_t BufSize>
+	void deque<T, A, BufSize>::push_front_aux(const value_type& val){
+		//reconstruction of map array
+		//more space at front
+		reserve_map_at_front();
+
+		//allocate memory
+		*(start.node - 1) = (pointer)data_allocator::allocate(buf_sz());
+		//initialize the iterator start
+		start.set_node(start.node - 1);
+		start.cur = start.last - 1;
+
+		//construct the object at the start.cur;
+		construct(start.cur, val);
+	}
+
+
+	//print the deque, not the standard port of STL deque
+	template<class T, class A, size_t BufSize>
+	void deque<T, A, BufSize>::print() const {
+		for (iterator it = begin(); it != end(); ++it) {
+			cout << (*it) << " ";
+		}
+		cout << endl;
+	}
+
+	//clear the deque, destroy all the objects and deallocate the resource
+	template<class T, class A, size_t BufSize>
+	void deque<T, A, BufSize>::clear(){
+		
+		for (map_pointer cur_node = start.node + 1; cur_node < finish.node; ++cur_node){
+			destroy(*cur_node, *cur_node + buf_sz());
+			data_allocator::deallocate(*cur_node, buf_sz());
+		}
+
+		if (start.node != finish.node){
+			destroy(start.cur, start.last);
+			destroy(finish.first, finish.cur);
+			//keep the memory chunk of start.node;
+			data_allocator::deallocate(finish.first, buf_sz());
+		}
+		else{
+			destroy(start.cur, finish.cur);
+		}
+		//set the iterator
+		finish = start;
+	}
+
+
+	//erase a area indiacte by two iterator
+	template<class T, class A, size_t BufSize>
+	iterator deque<T, A, BufSize>::erase(iterator pos_start, iterator pos_end){
+		size_type front_size = pos_start - start;
+		size_type back_size = finish - pos_end;
 
 
 
+	}
 
 }
 

@@ -31,6 +31,8 @@ namespace EcSTL{
 		rhs = std::move(T);
 	}
 
+	//source area is [first, last), target area is [result - (last - first), result);
+	//return (result - (last - first));
 	template<class BidrecIterator1, class BidrecIterator2>
 	BidrecIterator2 copy_reverse(BidrecIterator1 first, BidrecIterator1 last, BidrecIterator2 result){
 		--last; --result;
@@ -38,7 +40,6 @@ namespace EcSTL{
 		for (; first <= last; --last, --result) {
 			*result = *last;
 		}
-
 		return result;
 	}
 
