@@ -70,6 +70,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="UnitTest\deque_test.cpp" />
+    <ClCompile Include="UnitTest\stack_test.cpp" />
     <ClCompile Include="UnitTest\vector_test.cpp" />
     <ClCompile Include="UnitTest\list_test.cpp" />
   </ItemGroup>
@@ -82,8 +84,11 @@
     <ClInclude Include="hashtable.h" />
     <ClInclude Include="iterator.h" />
     <ClInclude Include="list.h" />
+    <ClInclude Include="queue.h" />
+    <ClInclude Include="stack.h" />
     <ClInclude Include="stl_hash_function.h" />
     <ClInclude Include="sub_alloc.h" />
+    <ClInclude Include="ec_time_clock.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="_type_trait.h" />
   </ItemGroup>

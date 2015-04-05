@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "iterator.h"
 #include "_type_trait.h"
+#include "allocator.h"
 
 //deque是一种，通过一个“map”，将多个内存块缓冲区模拟成一个整体的数组的数据结构
 //它的优点是适合在头尾进行删除增加，时间复杂度为O(1)，同时又与vector类似，不适合在中间进行插入数据，时间复杂度为O(n)
@@ -27,6 +28,8 @@ namespace EcSTL{
 		typedef T** map_pointer;
 		typedef ptrdiff_t difference_type;
 		typedef _deque_iterator<T, Ref, Ptr, BufSize> self;
+		typedef const T& const_reference;
+		typedef const T* const_pointer;
 
 		static size_t buffer_sz(){ return _deque_buf_size(BufSize, sizeof(T)); }
 
@@ -200,6 +203,8 @@ namespace EcSTL{
 		typedef ptrdiff_t difference_type;
 		typedef _deque_iterator<T, T&, T*, BufSize> iterator;
 		typedef deque<T, Alloc, BufSize> self;
+		typedef const T& const_reference;
+		typedef const T* const_pointer;
 
 	protected:
 

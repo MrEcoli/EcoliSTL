@@ -29,6 +29,12 @@
     <ClCompile Include="UnitTest\list_test.cpp">
       <Filter>UnitTest</Filter>
     </ClCompile>
+    <ClCompile Include="UnitTest\deque_test.cpp">
+      <Filter>UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTest\stack_test.cpp">
+      <Filter>UnitTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="_type_trait.h">
@@ -66,6 +72,15 @@
     </ClInclude>
     <ClInclude Include="deque.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ec_time_clock.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="queue.h">
+      <Filter>UnitTest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
