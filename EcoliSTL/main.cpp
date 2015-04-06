@@ -4,28 +4,33 @@
 #include <ctime>
 using std::cout;
 using std::endl;
-#include <allocators>
-
-#include "stack.h"
-#include <stack>
-#include <queue>
 #include "queue.h"
+#include "deque.h"
+
+#include "ec_timer.h"
+#include <windows.h>
+
 
 int main(){
 
+	EcSTL::timer t1;
+	EcSTL::deque<int> dq;
 
-	EcSTL::queue<int> que;
+	t1.startCounter();
 
-
-	for (int i = 0; i != 100; ++i) {
-		que.push(i);
+	for (int i = 0; i != 1000; ++i) {
+		dq.push_back(i);
 	}
 
-	while (!que.empty()){
-		cout << que.front() << endl;
-		que.pop();
+	while (!dq.empty()){
+	/*	cout << dq.back() << " ";*/
+		printf("%d ", dq.back());
+		dq.pop_back();
 	}
 
+	t1.endCounter();
+
+	cout << t1.getCounter() << endl;
 
 
 	std::cin.get();

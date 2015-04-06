@@ -76,11 +76,14 @@
     <ClInclude Include="stack.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ec_time_clock.h">
+    <ClInclude Include="heap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ec_timer.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="queue.h">
-      <Filter>UnitTest</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -58,6 +58,12 @@ namespace EcSTL{
 	}
 
 
+
+	//function used in heap
+
+	
+
+
 }
 
 

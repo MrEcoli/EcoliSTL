@@ -82,13 +82,14 @@
     <ClInclude Include="deque.h" />
     <ClInclude Include="functional.h" />
     <ClInclude Include="hashtable.h" />
+    <ClInclude Include="heap.h" />
     <ClInclude Include="iterator.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="queue.h" />
     <ClInclude Include="stack.h" />
     <ClInclude Include="stl_hash_function.h" />
     <ClInclude Include="sub_alloc.h" />
-    <ClInclude Include="ec_time_clock.h" />
+    <ClInclude Include="ec_timer.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="_type_trait.h" />
   </ItemGroup>
