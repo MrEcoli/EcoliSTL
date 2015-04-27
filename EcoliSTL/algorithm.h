@@ -6,7 +6,6 @@
 
 
 namespace EcSTL{
-
 	template<class InputIterator, class OutputIterator>
 	OutputIterator copy(InputIterator first, InputIterator last, OutputIterator out){
 		for (; first != last; ++first, ++out) {
@@ -89,32 +88,46 @@ namespace EcSTL{
 
 		difference_type mid = (n - 2) >> 1;
 		if (n && 1 == 0){
-			if (*(last - 1) > *(first + mid)){
+			if (*(last - 1) < *(first + mid)){
 				swap(*(last - 1), *(first + mid));
 			}
 			mid--;
 		}
 
 		for (difference_type cur_pos = mid; cur_pos >= 0; --cur_pos) {
-			adjustNode(first, cur_pos);
+			adjustNode(first, cur_pos, n);
 		}
 	}
 
 	//adjust node of heap
 	//default function is less<T>
 	template<class Iterator>
-	void adjustNode(Iterator start, size_t pos){
+	void adjustNode(Iterator start,  int pos, int n){
 		Iterator father = start + pos;
 		Iterator left_son = start + pos * 2 + 1;
 		Iterator right_son = start + pos * 2 + 2;
+		Iterator last = start + n;
+		if (left_son >= last){
+			return;
+		}
 
-		if (*left_son < *father){
+		if (right_son == last){
+			if (*left_son < *father){
+				swap(*left_son, *father);
+				return;
+			}
+		}
+
+		if (*left_son < *father && *left_son <= *right_son){
 			swap(*left_son, *father);
+			adjustNode(start, pos * 2 + 1, n);
+			return;
+		} else if (*right_son < *father && *right_son <= *left_son){
+			swap(*right_son, *father);
+			adjustNode(start, pos * 2 + 2, n);
+			return;
 		}
 
-		if (*right_son < *father){
-			swap(*right_son, *father);
-		}
 	}
 	
 	//adjust heap after push operation
@@ -129,106 +142,79 @@ namespace EcSTL{
 		}
 
 		difference_type cur_pos = n - 1;
-
-		//existence of last node
-		if (cur_pos && 1 == 1){
-			difference_type cur_father = (cur_pos - 1) >> 1;
-			if (*(first + cur_father) > *(first + cur_pos)){
-				swap(*(first + cur_father), *(first + cur_pos));
-			}
-			cur_pos = cur_father;
-		}
-		
-
-		while (cur_pos) {
-			difference_type cur_father = (cur_pos - 1) >> 1;
-			adjustNode(first, cur_father);
-			cur_pos = cur_father;
-		}
-
-	}
-
-	//adjust heap after pop operator
-	//time complexity O(logn)
-	template<class Iterator>
-	void pop_heap(Iterator first, Iterator last){
-		typedef int difference_type;
-		difference_type n = last - first;
-
-		//if heap is emtpy or has only one element
-		if (n == 0 || n == 1){
-			return;
-		}
-
-		difference_type current_pos = 0;
-		while (current_pos < n) {
-			difference_type left_idx = current_pos * 2 + 1;
-			difference_type right_idx = current_pos * 2 + 2;
-
-			if (right_idx < n){
-				if (*(first + left_idx) < *(first + right_idx)){
-					swap(*(first + left_idx), *(first + current_pos));
-					current_pos = left_idx;
-				}
-				else{
-					swap(*(first + right_idx), *(first + current_pos));
-					current_pos = right_idx;
-				}
-			}
-			else if (right_idx > n){
-				swap(*(first + current_pos), *(first + n - 1));
-				current_pos = n;
-			}
-			else{
-				swap(*(first + left_idx), *(first + current_pos));
-				current_pos = left_idx;
-			}
-			
+		difference_type parent = (cur_pos - 1) >> 1;
+		while (cur_pos != 0 && *(first + cur_pos) < *(first +parent)) {
+			swap(*(first + cur_pos), *(first + parent));
+			cur_pos = parent;
+			parent = (cur_pos - 1) >> 1;
 		}
 	}
 
 	//functions for heap with two parameter
-
 	template<class Iterator, class Cmp>
-	void adjustNode(Iterator start, size_t pos, Cmp cmpfunc){
-		Iterator father = start + pos;
-		Iterator left_son = start + pos * 2 + 1;
-		Iterator right_son = start + pos * 2 + 2;
+	void adjustNode(Iterator start, int pos, int n, Cmp cmpfunc){
+		int left = pos * 2 + 1;
+		int right = pos * 2 + 2;
+		int choices = pos;
+		
 
-		if (cmpfunc(*left_son, *father)){
-			swap(*left_son, *father);
+		if (left < n && cmpfunc(*(start + left), *(start + pos))){
+			choices = left;
 		}
 
-		if (cmpfunc(*right_son, *father)){
-			swap(*right_son, *father);
+		if (right < n && cmpfunc(*(start + right), *(start + choices))){
+			choices = right;
+		}
+
+		if ( choices != pos){
+			swap(*(start + choices), *(start + pos));
+			adjustNode(start, choices, n, cmpfunc);
 		}
 	}
 
+
 	template<class Iterator, class Cmp>
 	void make_heap(Iterator first, Iterator last, Cmp cmpfunc){
-		size_t n = (size_t)(last - first);
+		
+		int n = last - first;
 
 		if (n == 0 || n == 1){
 			return;
 		}
 
-		difference_type mid = (n - 1) >> 1;
+		int mid = (n - 1) >> 1;
 		if (n && 1 == 1){
-			if (cmpfunc(*(last - 1), *(first + mid))){
+			if (cmpfunc(*(first + mid), *(last - 1))){
 				swap(*(last - 1), *(first + mid));
 			}
 			mid--;
 		}
 
-		for (difference_type cur_pos = mid; cur_pos >= 0; --cur_pos) {
-			adjustNode(first, cur_pos, cmpfunc);
+		for (int cur_pos = mid; cur_pos >= 0; --cur_pos) {
+			adjustNode(first, cur_pos, n, cmpfunc);
 		}
 	}
 
-	
-	
 
+	template<class Iterator, class Cmp>
+	void push_heap(Iterator first, Iterator last, Cmp cmpfunc){
+		typedef int difference_type;
+		difference_type n = last - first;
 
+		if (n == 1 && n == 0){
+			return;
+		}
+
+		difference_type cur_pos = n - 1;
+		difference_type parent = (cur_pos - 1) >> 1;
+
+		while (cur_pos != 0 && cmpfunc(*(first + cur_pos), *(first + parent))){
+			swap(*(first + cur_pos), *(first + parent));
+			cur_pos = parent;
+			parent = (cur_pos - 1) >> 1;
+		}
+	}
+		
 
 
 

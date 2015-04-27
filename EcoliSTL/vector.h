@@ -63,8 +63,6 @@ namespace EcSTL{
 				vec_reserve = n * _DEFAULT_AOLLOCATE_STORE + vec_start;
 				uninitialized_fill_n(vec_start, n, T());
 			}
-
-
 		}
 
 		vector(const vector<T, Alloc>& others){
@@ -108,6 +106,9 @@ namespace EcSTL{
 		iterator end()const { return vec_end; }
 		const_iterator cbegin()const { return vec_start; }
 		const_iterator cend()const { return vec_end; }
+		T& front(){ return *vec_start; }
+		const T& front()const{ return *vec_start; }
+		T& back(){ return *(vec_end - 1); }
 		bool empty() const { return vec_end == vec_start; }
 		reference operator[](size_type n){ return *(vec_start + n); }
 		size_type size() const { return vec_end - vec_start; }

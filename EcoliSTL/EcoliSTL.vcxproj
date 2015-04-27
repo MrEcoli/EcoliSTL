@@ -71,6 +71,8 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UnitTest\deque_test.cpp" />
+    <ClCompile Include="UnitTest\dheap_test.cpp" />
+    <ClCompile Include="UnitTest\priority_queue_test.cpp" />
     <ClCompile Include="UnitTest\stack_test.cpp" />
     <ClCompile Include="UnitTest\vector_test.cpp" />
     <ClCompile Include="UnitTest\list_test.cpp" />
@@ -80,11 +82,13 @@
     <ClInclude Include="allocator.h" />
     <ClInclude Include="construct.h" />
     <ClInclude Include="deque.h" />
+    <ClInclude Include="d_heap.h" />
     <ClInclude Include="functional.h" />
     <ClInclude Include="hashtable.h" />
     <ClInclude Include="iterator.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="priority_queue.h" />
+    <ClInclude Include="quart_heap.h" />
     <ClInclude Include="queue.h" />
     <ClInclude Include="stack.h" />
     <ClInclude Include="stl_hash_function.h" />
