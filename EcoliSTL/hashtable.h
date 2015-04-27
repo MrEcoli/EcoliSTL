@@ -13,10 +13,10 @@ namespace EcSTL{
 
 	//hashtable中节点的定义
 
-	template<class _Ty>
+	template<class T>
 	struct _hash_node{
 		_hash_node* next;
-		data _Ty;
+		T data;
 	};
 
 	//hashtable中迭代器的定义
@@ -150,6 +150,7 @@ namespace EcSTL{
 			destory(&(ptr->data));
 			Alloc::deallocate(ptr);
 		}
+
 
 
 

@@ -11,6 +11,7 @@ using std::endl;
 #include "priority_queue.h"
 #include <random>
 #include "d_heap.h"
+#include <algorithm>
 
 void printVal(int v){
 	for (int i = 0; i != v; ++i) {
@@ -24,25 +25,9 @@ void printVal(int v){
 
 int main(){
 
-	int arr[] = { 34, 1, 33, 5, 7, 4 };
+	int arr[] = { 7, 6, 5, 5, 4 ,3, 2, 2};
 
-	EcSTL::dheap_pq<int, 4, EcSTL::vector<int>, EcSTL::greater<int>> pq;
-
-	for (int i = 0; i != 50; ++i) {
-		pq.push(rand() % 50);
-	}
-	
-
-	pq.print();
-	cout << pq.size();
-	cout << endl;
-
-	while (!pq.empty()){
-		cout << pq.front() << endl;
-		pq.pop();
-	}
-
-	cout << pq.size() << endl;
+	cout << EcSTL::lower_bound(arr, arr + 6, 4, EcSTL::greater<int>()) - arr << endl;
 
 
 	cin.get();

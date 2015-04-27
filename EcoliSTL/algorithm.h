@@ -58,7 +58,192 @@ namespace EcSTL{
 	}
 
 
+	template<class Iterator, class T>
+	Iterator lower_bound(Iterator first, Iterator last, const T& val){
+		typedef typename Iterator::iterator_category category;
+		return lower_bound(first, last, val, category());
+	}
 
+	template<class Iterator, class T>
+	Iterator lower_bound(Iterator first, Iterator last, const T& val, random_access_iterator_tag){
+		Iterator mid = first;
+		while (first < last){
+			mid = first + ((last - first) >> 1);
+
+			if (*mid >= val){
+				last = mid;
+			}
+			else{
+				first = mid+1;
+			}
+
+		}
+		return first;
+	}
+
+	template<class Iterator, class T>
+	Iterator lower_bound(Iterator first, Iterator last, const T& val, forward_iterator_tag){
+		typedef Iterator::difference_type difference_type;
+		difference_type n = distance(first, last);
+		Iterator mid = first;
+		difference_type half;
+		while (n) {
+			half = n >> 1;
+			mid = advance(first, half);
+			if (*mid < val){
+				first = ++mid;
+				n = n - half - 1;
+			}
+			else{
+				n = half;
+			}
+		}
+		return first;
+	}
+
+
+	template<class Iterator, class T, class Cmp>
+	Iterator lower_bound(Iterator first, Iterator last, const T& val, Cmp cmpfunc){
+		typedef typename Iterator::iterator_category category;
+		return lower_bound(first, last, val, cmpfunc, category());
+	}
+
+
+	template<class Iterator, class T, class Cmp>
+	Iterator lower_bound(Iterator first, Iterator last, const T& val, Cmp cmpfunc, random_access_iterator_tag){
+		Iterator mid = first;
+
+		while (first < last) {
+			mid = first + ((last - first) >> 1);
+
+			if (cmpfunc(*mid, val)){
+				first = mid + 1;
+			}
+			else{
+				last = mid;
+			}
+
+		}
+		return first;
+	}
+
+	template<class Iterator, class T, class Cmp>
+	Iterator lower_bound(Iterator first, Iterator last, const T& val, Cmp cmpfunc, forward_iterator_tag){
+		Iterator mid = first;
+		typedef typename Iterator::difference_type difference_type;
+		difference_type n = distance(first, last);
+		difference_type half;
+
+		while (n) {
+			half = n >> 1;
+			mid = advance(first, half);
+
+			if (cmpfunc(*mid, val)){
+				first = mid++;
+				n = n - half - 1;
+			}
+			else
+				n = half;
+		}
+		return first;
+	}
+
+
+	template<class Iterator, class T>
+	Iterator upper_bound(Iterator first, Iterator last, const T& val){
+		typedef typenmae Iteraotr::iterator_category category;
+		upper_bound(first, last, val, category);
+	}
+
+	template<class Iterator, class T>
+	Iterator upper_bound(Iterator first, Iterator last, const T* val, random_access_iterator_tag){
+		typedef typename Iterator::difference_type difference_type;
+		difference_type n = distance(first, last);
+		Iterator mid;
+		while (n) {
+			difference_type half = n >> 1;
+			mid = first + half;
+			if (val < *mid){
+				n = half;
+			}
+			else{
+				n = n - half - 1;
+				first = ++mid;
+			}
+		}
+		return first;
+	}
+
+	template<class Iterator, class T>
+	Iterator upper_bound(Iterator first, Iterator last, const T* val, forward_iterator_tag){
+		typedef typename Iterator::difference_type difference_type;
+		difference_type n = distance(first, last);
+		Iterator mid;
+		while (n) {
+			difference_type half = n >> 1;
+			mid = advance(first, half);
+			if (val < *mid){
+				n = half;
+			}
+			else{
+				n = n - half - 1;
+				first = ++mid;
+			}
+		}
+		return first;
+	}
+
+	template<class Iterator, class T, class Cmp>
+	Iterator upper_bound(Iterator first, Iterator last, const T& val, Cmp cmpfunc){
+		typedef typenmae Iteraotr::iterator_category category;
+		upper_bound(first, last, val, cmpfunc, category);
+	}
+
+	template<class Iterator, class T, class Cmp>
+	Iterator upper_bound(Iterator first, Iterator last, const T& val, Cmp cmpfunc, random_access_iterator_tag){
+		typedef typename Iterator::difference_type difference_type;
+		difference_type n = last - first;
+		Iterator mid;
+		difference_type half;
+
+		while (n) {
+			half = n >> 1;
+			mid = first + half;
+
+			if (val < *mid){
+				n = half;
+			}
+			else{
+				first = ++mid;
+				n = n - half - 1;
+			}
+		}
+		return first;
+
+	}
+
+	template<class Iterator, class T, class Cmp>
+	Iterator upper_bound(Iterator first, Iterator last, const T& val, Cmp cmpfunc, forward_iterator_tag){
+		typedef typename Iterator::difference_type difference_type;
+		difference_type n = distance(first, last);
+		Iterator mid;
+		difference_type half;
+
+		while (n) {
+			half = n >> 1;
+			mid = advance(first, half);
+
+			if (val < *mid){
+				n = half;
+			}
+			else{
+				first = ++mid;
+				n = n - half - 1;
+			}
+		}
+		return first;
+
+	}
 
 
 
