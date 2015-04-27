@@ -1,4 +1,4 @@
-#ifndef _ECOLI_ITERATOR_H
+ï»¿#ifndef _ECOLI_ITERATOR_H
 #define _ECOLI_ITERATOR_H
 
 #include "_type_trait.h"
@@ -50,8 +50,8 @@ namespace EcSTL{
 	};
 
 
-	//iterator class²»°üº¬ÈÎºÎÊı¾İ³ÉÔ±£¬Ö»Ìá¹©ĞÍ±ğ¶¨Òå£¬ĞÂµÄiterator¼Ì³ĞËü²»»áÔö¼Ó¸ºµ£
-	//ÒòÎªÒÑ¾­Ìá¹©ÁËºó3¸öĞÍ±ğ²ÎÊıµÄÄ¬ÈÏĞÍ±ğ£¬ËùÒÔÔÚ¶¨ÒåĞÂµÄiteratorÊ±£¬Ö»ĞèÒª¸øÓèiterator_categoryÒÔ¼°Ö¸ÏòµÄÊı¾İ³ÉÔ±ÀàĞÍ¼´¿É¡£
+	//iterator classä¸åŒ…å«ä»»ä½•æ•°æ®æˆå‘˜ï¼Œåªæä¾›å‹åˆ«å®šä¹‰ï¼Œæ–°çš„iteratorç»§æ‰¿å®ƒä¸ä¼šå¢åŠ è´Ÿæ‹…
+	//å› ä¸ºå·²ç»æä¾›äº†å3ä¸ªå‹åˆ«å‚æ•°çš„é»˜è®¤å‹åˆ«ï¼Œæ‰€ä»¥åœ¨å®šä¹‰æ–°çš„iteratoræ—¶ï¼Œåªéœ€è¦ç»™äºˆiterator_categoryä»¥åŠæŒ‡å‘çš„æ•°æ®æˆå‘˜ç±»å‹å³å¯ã€‚
 	
 
 	template<class Iterator>
@@ -137,9 +137,88 @@ namespace EcSTL{
 	}
 
 	template<class InputIterator>
+	inline InputIterator next(InputIterator iter, size_t n){
+		if (n == 0){
+			return iter;
+		}
+
+		typedef typename InputIterator::iterator_category category;
+		return next(iter, n, category());
+	}
+
+	template<class InputIterator>
+	inline InputIterator next(InputIterator iter, size_t n, random_access_iterator_tag){
+		return iter + n;
+	}
+
+	template<class InputIterator>
+	inline InputIterator next(InputIterator iter, size_t n, input_iterator_tag){
+		size_t cur = 0;
+
+		while (cur++ != n){
+			++iter;
+		}
+		return iter;
+	}
+
+	template<class InputIterator>
+	inline InputIterator next(InputIterator iter, size_t n, bidirectional_iterator_tag){
+		size_t cur = 0;
+
+		while (cur++ != n){
+			++iter;
+		}
+		return iter;
+	}
+
+	template<class InputIterator>
+	inline InputIterator next(InputIterator iter, size_t n, forward_iterator_tag){
+		size_t cur = 0;
+
+		while (cur++ != n){
+			++iter;
+		}
+		return iter;
+	}
+
+
+	template<class InputIterator>
 	inline InputIterator prev(InputIterator iter){
 		return --iter;
 	}
+
+	template<class InputIterator>
+	inline InputIterator prev(InputIterator iter, size_t n){
+		if (n == 0){
+			return iter;
+		}
+		typedef typename InputIterator::iterator_category category;
+		return next(iter, n, category());
+	}
+
+
+	template<class InputIterator>
+	inline InputIterator prev(InputIterator iter, size_t n, random_access_iterator_tag){
+		return iter - n;
+	}
+
+	template<class InputIterator>
+	inline InputIterator prev(InputIterator iter, size_t n, bidirectional_iterator_tag){
+		size_t cur = 0;
+
+		while (cur++ != n){
+			--iter;
+		}
+
+		return iter;
+	}
+
+
+
+
+
+
+
 
 
 

@@ -1,22 +1,22 @@
-#ifndef _ECSTL_FUNCTIONAL_H
+ï»¿#ifndef _ECSTL_FUNCTIONAL_H
 #define _ECSTL_FUNCTIONAL_H
 
-//·Âº¯Êı£¬Í¨¹ıÖØÔØÀàµÄoperator ()£¬Ä£·ÂÁËº¯ÊıµÄ¹¦ÄÜ
-//Í¨¹ı¸øÓè²ÎÊıµÄÊıÄ¿£¬¿ÉÒÔ·ÖÎªÒ»ÔªºÍ¶şÔª·Âº¯Êı
-//¸ù¾İ·Âº¯ÊıµÄ¹¦ÄÜfunctionalÀïµÄ·Âº¯Êı¿ÉÒÔ·ÖÎªËãÊõ£¬Âß¼­£¬¹ØÏµÔËËãµÈ
+//ä»¿å‡½æ•°ï¼Œé€šè¿‡é‡è½½ç±»çš„operator ()ï¼Œæ¨¡ä»¿äº†å‡½æ•°çš„åŠŸèƒ½
+//é€šè¿‡ç»™äºˆå‚æ•°çš„æ•°ç›®ï¼Œå¯ä»¥åˆ†ä¸ºä¸€å…ƒå’ŒäºŒå…ƒä»¿å‡½æ•°
+//æ ¹æ®ä»¿å‡½æ•°çš„åŠŸèƒ½functionalé‡Œçš„ä»¿å‡½æ•°å¯ä»¥åˆ†ä¸ºç®—æœ¯ï¼Œé€»è¾‘ï¼Œå…³ç³»è¿ç®—ç­‰
 
 
 
 namespace EcSTL {
 
-	//STLËùÓĞµÄÒ»Ôª·Âº¯Êı±ØĞë¼Ì³ĞÒÔÏÂÀà, ĞÍ±ğÉùÃ÷
+	//STLæ‰€æœ‰çš„ä¸€å…ƒä»¿å‡½æ•°å¿…é¡»ç»§æ‰¿ä»¥ä¸‹ç±», å‹åˆ«å£°æ˜
 	template<class T, class Result>
 	class unary_function{
 		typedef T argument_type;
 		typedef Result result_type;
 	};
 
-	//STLËùÓĞµÄ¶şÔª·Âº¯Êı±ØĞë¼Ì³ĞÒÔÏÂÀà, ĞÍ±ğÉùÃ÷
+	//STLæ‰€æœ‰çš„äºŒå…ƒä»¿å‡½æ•°å¿…é¡»ç»§æ‰¿ä»¥ä¸‹ç±», å‹åˆ«å£°æ˜
 
 	template<class Arg1, class Arg2, class Result>
 	class binary_function{
@@ -26,7 +26,7 @@ namespace EcSTL {
 	};
 	
 
-	//ËãÊõ·Âº¯Êı
+	//ç®—æœ¯ä»¿å‡½æ•°
 
 	template<class T>
 	struct plus:public binary_function < T, T, T > {
@@ -74,7 +74,7 @@ namespace EcSTL {
 
 
 
-	//¹ØÏµÔËËãÏà¹Ø·Âº¯Êı
+	//å…³ç³»è¿ç®—ç›¸å…³ä»¿å‡½æ•°
 
 	template<class T>
 	struct equal_to:public binary_function < T, T, bool > {
@@ -125,7 +125,7 @@ namespace EcSTL {
 
 
 	
-	//Âß¼­ÔËËã·Âº¯Êı
+	//é€»è¾‘è¿ç®—ä»¿å‡½æ•°
 	template<class T>
 	struct logical_and:public binary_function < T, T, bool > {
 		bool operator()(const T& x, const T& y) const {
@@ -150,7 +150,7 @@ namespace EcSTL {
 
 
 
-	//Ö¤Í¬£¬Ñ¡Ôñ£¬Í¶Éä·Âº¯Êı
+	//è¯åŒï¼Œé€‰æ‹©ï¼ŒæŠ•å°„ä»¿å‡½æ•°
 
 	template<class T>
 	struct identity:public unary_function < T, T > {
@@ -172,7 +172,7 @@ namespace EcSTL {
 
 
 
-	//Í¶Éäº¯Êı
+	//æŠ•å°„å‡½æ•°
 
 
 	template<class T1, class T2>

@@ -1,17 +1,17 @@
-#ifndef _ECSTL_HASHMAP_H
+ï»¿#ifndef _ECSTL_HASHMAP_H
 #define _ECSTL_HASHMAP_H
 
 #include "vector.h"
 
-//EcSTLµÄhashtable²ÉÓÃ¿ªÁ´·¨½â¾öprimer cluster
-//hashtableÍ¨¹ıÒ»¸övector±£´æbucket
-//Ã¿Ò»¸öbucketÀï¶¼Î¬»¤×ÅÒ»¸öÁ´±í
-//Í¨¹ı¸øÓèµÄÄ£°å²ÎÊıHashFcnÈ·¶¨KeyËùÔÚµÄbucketµÄÎ»ÖÃ£¬È»ºóÔÚÕâ¸öbucketÖĞ½øĞĞ²åÈë
-//iterator ²»µ¥µ¥Òª±£´æËüËùÖ¸ÏòµÄnode½ÚµãµÄÖ¸Õë£¬Í¬Ê±Ò²Òª±£´æÕû¸öhashtableµÄÖ¸Õë£¬ForwardIteratorµÄ»ù±¾¹¦ÄÜ£¬ÔÚbucketµÄÄ©Î²Îª¿ÕµÄÇé¿öÏÂ£¬Ö¸ÏòÏÂÒ»¸öbucket¡£
+//EcSTLçš„hashtableé‡‡ç”¨å¼€é“¾æ³•è§£å†³primer cluster
+//hashtableé€šè¿‡ä¸€ä¸ªvectorä¿å­˜bucket
+//æ¯ä¸€ä¸ªbucketé‡Œéƒ½ç»´æŠ¤ç€ä¸€ä¸ªé“¾è¡¨
+//é€šè¿‡ç»™äºˆçš„æ¨¡æ¿å‚æ•°HashFcnç¡®å®šKeyæ‰€åœ¨çš„bucketçš„ä½ç½®ï¼Œç„¶ååœ¨è¿™ä¸ªbucketä¸­è¿›è¡Œæ’å…¥
+//iterator ä¸å•å•è¦ä¿å­˜å®ƒæ‰€æŒ‡å‘çš„nodeèŠ‚ç‚¹çš„æŒ‡é’ˆï¼ŒåŒæ—¶ä¹Ÿè¦ä¿å­˜æ•´ä¸ªhashtableçš„æŒ‡é’ˆï¼ŒForwardIteratorçš„åŸºæœ¬åŠŸèƒ½ï¼Œåœ¨bucketçš„æœ«å°¾ä¸ºç©ºçš„æƒ…å†µä¸‹ï¼ŒæŒ‡å‘ä¸‹ä¸€ä¸ªbucketã€‚
 
 namespace EcSTL{
 
-	//hashtableÖĞ½ÚµãµÄ¶¨Òå
+	//hashtableä¸­èŠ‚ç‚¹çš„å®šä¹‰
 
 	template<class _Ty>
 	struct _hash_node{
@@ -19,11 +19,11 @@ namespace EcSTL{
 		data _Ty;
 	};
 
-	//hashtableÖĞµü´úÆ÷µÄ¶¨Òå
+	//hashtableä¸­è¿­ä»£å™¨çš„å®šä¹‰
 
 	template<class Value, class Key, class HashFcn, class ExtractKey, class EqualKey, class Alloc>
 	struct _hash_iterator{
-		//iterator ĞÍ±ğÉùÃ÷;
+		//iterator å‹åˆ«å£°æ˜;
 		typedef _hash_iterator<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc> iterator;
 		typedef hashtable<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc> hashtable;
 		typedef _hash_const_iterator<Value, Key, HashFcn, ExtractKey, EqualKey, Alloc> iterator;
@@ -36,24 +36,24 @@ namespace EcSTL{
 		typedef size_t size_type;
 		typedef ptrdiff_t difference_type;
 
-		//µ±Ç°ËùÖ¸ÏòµÄ½Úµã
+		//å½“å‰æ‰€æŒ‡å‘çš„èŠ‚ç‚¹
 		node* current_node;
 
-		//µ±Ç°ËùÔÚµÄhashtableµØÖ·
+		//å½“å‰æ‰€åœ¨çš„hashtableåœ°å€
 		hashtable* ht;
 
-		//¹¹Ôìº¯Êı
+		//æ„é€ å‡½æ•°
 
 		_hash_iterator(node* given_node, hashtable* given_ht) :current_node(given_node), ht(given_ht){}
 
 		_hash_iterator() :current_node(nullptr), ht(nullptr) {}
 
-		//¿ÉÒÔ¶¨ÒåÎªconst,ÒòÎª¸Ã²Ù×÷²»»á¸Ä±ä current_nodeºÍhtµÄÊı¾İ
+		//å¯ä»¥å®šä¹‰ä¸ºconst,å› ä¸ºè¯¥æ“ä½œä¸ä¼šæ”¹å˜ current_nodeå’Œhtçš„æ•°æ®
 		reference operator*()const{
 			return current_node->data;
 		}
 
-		//¿ÉÒÔ¶¨ÒåÎªconst,ÒòÎª¸Ã²Ù×÷²»»á¸Ä±ä current_nodeºÍhtµÄÊı¾İ
+		//å¯ä»¥å®šä¹‰ä¸ºconst,å› ä¸ºè¯¥æ“ä½œä¸ä¼šæ”¹å˜ current_nodeå’Œhtçš„æ•°æ®
 		pointer operator->()const{
 			return &(operator*());
 		}
@@ -69,13 +69,13 @@ namespace EcSTL{
 
 	template<class V, class K, class Hf, class Exk, class Eqk, class A>
 	_hash_iterator<V, K, Hf, Exk, Eqk, A>& _hash_iterator<V, K, Hf, Exk, Eqk, A>::operator++(){
-		//ÕâÀï±£´æµÄÊÇiterator£¬ÀïÃæµÄÔªËØÊÇÁ½¸öÖ¸Õë
-		//²¢²»±£´æValueµÄÔ­ÒòÊÇ£¬¹¹ÔìValueÀàĞÍ¿ÉÄÜĞèÒªµ÷ÓÃ´óÁ¿µÄ×ÊÔ´¡£
+		//è¿™é‡Œä¿å­˜çš„æ˜¯iteratorï¼Œé‡Œé¢çš„å…ƒç´ æ˜¯ä¸¤ä¸ªæŒ‡é’ˆ
+		//å¹¶ä¸ä¿å­˜Valueçš„åŸå› æ˜¯ï¼Œæ„é€ Valueç±»å‹å¯èƒ½éœ€è¦è°ƒç”¨å¤§é‡çš„èµ„æºã€‚
 
 		iterator origin = current_node;
 		current_node = current_node->next;
 
-		//Èç¹ûbucketµÄÁ´±íÒÑ¿Õ
+		//å¦‚æœbucketçš„é“¾è¡¨å·²ç©º
 		if (!current_node){
 			size_type bucket_position = ht->bkt_num(origin->data);
 
@@ -87,7 +87,7 @@ namespace EcSTL{
 		return *this;
 	}
 
-	//ÉèÖÃÎªÄÚÁªº¯Êı
+	//è®¾ç½®ä¸ºå†…è”å‡½æ•°
 	template<class V, class K, class Hf, class Exk, class Eqk, class A>
 	inline _hash_iterator<V, K, Hf, Exk, Eqk, A>& _hash_iterator<V, K, Hf, Exk, Eqk, A>::operator++(int){
 
@@ -99,7 +99,7 @@ namespace EcSTL{
 	}
 
 
-	//hashtableµÄ¶¨Òå
+	//hashtableçš„å®šä¹‰
 
 	template<class Value, class Key, class HashFunc, class ExtractKey, class EqualKey, class Alloc = allocator<_hash_node<Value>>>
 	class hashtable{
@@ -111,33 +111,33 @@ namespace EcSTL{
 		typedef Value value_type;
 
 	private:
-		//hashtableµÄÊı¾İ³ÉÔ±
-		//hashº¯Êı£¬ÓÃÓÚÈ·¶¨ValueµÄÎ»ÖÃ
+		//hashtableçš„æ•°æ®æˆå‘˜
+		//hashå‡½æ•°ï¼Œç”¨äºç¡®å®šValueçš„ä½ç½®
 		hasher hash;
-		//ÓÃÓÚ±È½ÏkeyÖµÊÇ·ñÏàÍ¬µÄ·Âº¯Êı
+		//ç”¨äºæ¯”è¾ƒkeyå€¼æ˜¯å¦ç›¸åŒçš„ä»¿å‡½æ•°
 		key_equal equals;
-		//±È½ÏÖµ´óĞ¡µÄ·Âº¯Êı
+		//æ¯”è¾ƒå€¼å¤§å°çš„ä»¿å‡½æ•°
 		ExtractKey get_key;
 
 		typedef _hash_node<Value> node;
 		typedef Alloc node_allocator;
 
-		//vectorÓÃÓÚ´æ´¢Á´±í£¬ÔªËØµÄ´æ´¢ÔÚvectorÖĞµÄÎ»ÖÃÓÉhashº¯Êı/·Âº¯Êı¾ö¶¨
+		//vectorç”¨äºå­˜å‚¨é“¾è¡¨ï¼Œå…ƒç´ çš„å­˜å‚¨åœ¨vectorä¸­çš„ä½ç½®ç”±hashå‡½æ•°/ä»¿å‡½æ•°å†³å®š
 		vector<node*> buckets;
-		//´æ´¢µÄÔªËØµÄÊıÄ¿
+		//å­˜å‚¨çš„å…ƒç´ çš„æ•°ç›®
 		size_type num_elements;
 
 	public:
 
-		//hashtableÖĞÔªËØµÄÊıÄ¿
+		//hashtableä¸­å…ƒç´ çš„æ•°ç›®
 		size_type size()const{ return num_elements; }
 
-		//Á´±íµÄÊıÄ¿
+		//é“¾è¡¨çš„æ•°ç›®
 		size_type bucket_count()const { return buckets.size(); }
 
 
 	protected:
-		//ÅäÖÃµ¥¸öÁ´±í½Úµã¿Õ¼äµÄº¯Êı
+		//é…ç½®å•ä¸ªé“¾è¡¨èŠ‚ç‚¹ç©ºé—´çš„å‡½æ•°
 
 		node* new_node(const value_type& _val){
 			node *ptr = Alloc::allocate(1);

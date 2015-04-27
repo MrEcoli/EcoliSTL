@@ -3,36 +3,32 @@
 #include <new>
 #include <ctime>
 using std::cout;
+using std::cin;
 using std::endl;
-#include "queue.h"
-#include "deque.h"
-
-#include "ec_timer.h"
-#include <windows.h>
-
+#include "vector.h"
+#include "algorithm.h"
 
 int main(){
 
-	EcSTL::timer t1;
-	EcSTL::deque<int> dq;
 
-	t1.startCounter();
+	int arr[] = { 7, 5, 3, 6, 1, 5, 2 };
 
-	for (int i = 0; i != 1000; ++i) {
-		dq.push_back(i);
-	}
+	EcSTL::vector<int> ivec(arr, arr + 7);
 
-	while (!dq.empty()){
-	/*	cout << dq.back() << " ";*/
-		printf("%d ", dq.back());
-		dq.pop_back();
-	}
+	ivec.print();
 
-	t1.endCounter();
+	EcSTL::make_heap(ivec.begin(), ivec.end());
 
-	cout << t1.getCounter() << endl;
+	ivec.print();
 
+	EcSTL::pop_heap(ivec.begin(), ivec.end());
 
-	std::cin.get();
+	ivec.print();
+
+	EcSTL::push_heap(ivec.begin(), ivec.end());
+
+	ivec.print();
+
+	cin.get();
 	return 0;
 }

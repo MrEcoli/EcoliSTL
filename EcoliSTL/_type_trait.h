@@ -1,6 +1,6 @@
-#ifndef _ECOLI_TYPE_TRAIT_H
+ï»¿#ifndef _ECOLI_TYPE_TRAIT_H
 #define _ECOLI_TYPE_TRAIT_H
-//ÀûÓÃÆ«ÌØ»¯ Partial specialization ½øĞĞÀàĞÍĞÅÏ¢İÍÈ¡
+//åˆ©ç”¨åç‰¹åŒ– Partial specialization è¿›è¡Œç±»å‹ä¿¡æ¯èƒå–
 
 
 namespace EcSTL{
@@ -16,7 +16,7 @@ namespace EcSTL{
 		typedef _false_type	has_trivial_default_assignment_operator;
 		typedef _false_type	has_trivial_default_destructor;
 
-		//is_POD_typeÖ¸Plain Old Data, ±êÁ¿ÀàĞÍ»ò´«Í³µÄC structĞÍ±ğ£¬ËüÃÇµÄ¹¹Ôìº¯Êı£¬Îö¹¹º¯Êı£¬¿½±´º¯Êı£¬¿½±´¸³Öµº¯ÊıµÈ¶¼ÊÇ²»ÖØÒª£¬trivialµÄ
+		//is_POD_typeæŒ‡Plain Old Data, æ ‡é‡ç±»å‹æˆ–ä¼ ç»Ÿçš„C structå‹åˆ«ï¼Œå®ƒä»¬çš„æ„é€ å‡½æ•°ï¼Œææ„å‡½æ•°ï¼Œæ‹·è´å‡½æ•°ï¼Œæ‹·è´èµ‹å€¼å‡½æ•°ç­‰éƒ½æ˜¯ä¸é‡è¦ï¼Œtrivialçš„
 		typedef _false_type	is_POD_type;
 
 	};

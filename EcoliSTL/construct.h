@@ -1,4 +1,4 @@
-#ifndef _ECOLISTL_CONSTRUCT_H
+ï»¿#ifndef _ECOLISTL_CONSTRUCT_H
 #define _ECOLISTL_CONSTRUCT_H
 
 #include <new>
@@ -7,7 +7,7 @@
 
 namespace EcSTL{
 
-	//ÎªÊ²Ã´ÕâÀï»áÓĞ¸öT2ÄØ£¿£¿
+	//ä¸ºä»€ä¹ˆè¿™é‡Œä¼šæœ‰ä¸ªT2å‘¢ï¼Ÿï¼Ÿ
 	template<typename T1, typename T2>
 	inline void construct(T1* ptr, const T2& val){
 		//placement new;
@@ -41,7 +41,7 @@ namespace EcSTL{
 
 
 
-	//µ÷ÓÃ²»Í¬°æ±¾µÄÎö¹¹º¯Êı
+	//è°ƒç”¨ä¸åŒç‰ˆæœ¬çš„ææ„å‡½æ•°
 	template<typename T>
 	inline void destroy(T* ptr){
 		if (ptr){
@@ -51,12 +51,12 @@ namespace EcSTL{
 
 	template<typename ForwardIterator>
 	inline void destroy(ForwardIterator first, ForwardIterator last){
-		//ÕâÀïµÄvalue_typeº¯ÊıÊÇIteratorµÄÒ»¸öÄÚÖÃº¯Êı£¬·µ»ØÒ»¸öÖ¸Ïò¿ÕÖ¸ÕëµÄT*;
+		//è¿™é‡Œçš„value_typeå‡½æ•°æ˜¯Iteratorçš„ä¸€ä¸ªå†…ç½®å‡½æ•°ï¼Œè¿”å›ä¸€ä¸ªæŒ‡å‘ç©ºæŒ‡é’ˆçš„T*;
 		_destroy(first, last, value_type(first));
 	}
 
 
-	//¸ù¾İ¶ÔÏóTÊÇ·ñÓĞtrivial destructor ½øĞĞÆ«ÌØ»¯İÍÈ¡;
+	//æ ¹æ®å¯¹è±¡Tæ˜¯å¦æœ‰trivial destructor è¿›è¡Œåç‰¹åŒ–èƒå–;
 	template<typename ForwardIterator, typename T>
 	inline void _destroy(ForwardIterator first, ForwardIterator last, T*){
 		typedef typename _type_trait<T>::has_trivial_default_destructor trivial_destructor;
@@ -75,7 +75,7 @@ namespace EcSTL{
 	inline void __destroy_aux(ForwardIterator first, ForwardIterator last, _true_type x) {}
 
 
-	//²ÎÊıÎªÁ½¸öÖ¸ÕëµÄdestroyº¯Êı£»
+	//å‚æ•°ä¸ºä¸¤ä¸ªæŒ‡é’ˆçš„destroyå‡½æ•°ï¼›
 
 	template<class ForwardIterator, class Distance>
 		inline void destory(ForwardIterator iter, Distance dis){
@@ -107,7 +107,7 @@ namespace EcSTL{
 
 
 
-	//Õë¶ÔcharÓëwcharµÄÌØ»¯°æ±¾£¬ _type_traitÖĞ²¢Î´ÌØ»¯charÓëwchar
+	//é’ˆå¯¹charä¸wcharçš„ç‰¹åŒ–ç‰ˆæœ¬ï¼Œ _type_traitä¸­å¹¶æœªç‰¹åŒ–charä¸wchar
 
 
 
@@ -117,7 +117,7 @@ namespace EcSTL{
 	inline void destory(wchar_t*, wchar_t*){}
 
 
-	//Ê×ÏÈİÍÈ¡iteratorµÄvalue_type
+	//é¦–å…ˆèƒå–iteratorçš„value_type
 	template<class InputIterator, class ForwardIterator>
 	inline ForwardIterator uninitialized_copy(InputIterator first, InputIterator last, ForwardIterator out){
 		return _uninitialized_copy(first, last, out, value_type(first));
@@ -148,7 +148,7 @@ namespace EcSTL{
 
 
 
-	//ÀûÓÃtype_traitÑ¡Ôñ×îÓÅµÄµÄº¯ÊıÊµÏÖuninitialized_fill
+	//åˆ©ç”¨type_traité€‰æ‹©æœ€ä¼˜çš„çš„å‡½æ•°å®ç°uninitialized_fill
 	template<class ForwardIterator, class T>
 	inline void uninitialized_fill(ForwardIterator first, ForwardIterator last, const T& v){
 		typedef typename _type_trait<T>::is_POD_type is_POD;
@@ -172,7 +172,7 @@ namespace EcSTL{
 	}
 
 
-	//ÀûÓÃtype_traitÑ¡Ôñ×îÓÅµÄµÄº¯ÊıÊµÏÖuninitialized_fill
+	//åˆ©ç”¨type_traité€‰æ‹©æœ€ä¼˜çš„çš„å‡½æ•°å®ç°uninitialized_fill
 	template<class ForwardIterator, class Distance, class T>
 	inline void uninitialized_fill_n(ForwardIterator first, Distance dis, const T& v){
 		typedef typename _type_trait<T>::is_POD_type is_POD;

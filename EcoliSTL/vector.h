@@ -84,6 +84,21 @@ namespace EcSTL{
 			}
 		}
 
+		template<class Iterator>
+		vector(Iterator first, Iterator last){
+			difference_type n = distance(first, last);
+
+			if (n == 0){
+				vec_start = vec_end = vec_reserve = 0;
+				return;
+			}
+					
+			vec_start = (T *)Alloc::allocate(n);
+			vec_end = vec_start + n;
+			vec_reserve = vec_end;
+			uninitialized_copy(first, last, vec_start);
+		}
+
 
 		//常用的成员函数
 

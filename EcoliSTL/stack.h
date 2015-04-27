@@ -1,4 +1,4 @@
-#ifndef _ECSTL_STACK_H
+﻿#ifndef _ECSTL_STACK_H
 #define _ECSTL_STACK_H
 
 #include "deque.h"

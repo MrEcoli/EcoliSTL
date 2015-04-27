@@ -1,4 +1,4 @@
-#ifndef _ECSTL_QUEUE_H
+﻿#ifndef _ECSTL_QUEUE_H
 #define _ECSTL_QUEUE_H
 
 
