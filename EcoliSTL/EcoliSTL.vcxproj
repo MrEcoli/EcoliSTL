@@ -70,6 +70,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="UnitTest\algorithm_test.cpp" />
     <ClCompile Include="UnitTest\deque_test.cpp" />
     <ClCompile Include="UnitTest\dheap_test.cpp" />
     <ClCompile Include="UnitTest\priority_queue_test.cpp" />
@@ -83,10 +84,13 @@
     <ClInclude Include="construct.h" />
     <ClInclude Include="deque.h" />
     <ClInclude Include="d_heap.h" />
+    <ClInclude Include="ecstl_hash_func.h" />
     <ClInclude Include="functional.h" />
     <ClInclude Include="hashtable.h" />
+    <ClInclude Include="hash_function.h" />
     <ClInclude Include="iterator.h" />
     <ClInclude Include="list.h" />
+    <ClInclude Include="pair.h" />
     <ClInclude Include="priority_queue.h" />
     <ClInclude Include="queue.h" />
     <ClInclude Include="stack.h" />

@@ -2,6 +2,7 @@
 #define _ECOLISTL_ALGORITHM_H
 #include <xutility>
 #include "iterator.h"
+#include "algorithm.h"
 
 
 
@@ -60,7 +61,7 @@ namespace EcSTL{
 
 	template<class Iterator, class T>
 	Iterator lower_bound(Iterator first, Iterator last, const T& val){
-		typedef typename Iterator::iterator_category category;
+		typedef typename iterator_traits<Iterator>::iterator_category category;
 		return lower_bound(first, last, val, category());
 	}
 
@@ -104,7 +105,7 @@ namespace EcSTL{
 
 	template<class Iterator, class T, class Cmp>
 	Iterator lower_bound(Iterator first, Iterator last, const T& val, Cmp cmpfunc){
-		typedef typename Iterator::iterator_category category;
+		typedef typename iterator_traits<Iterator>::iterator_category category;
 		return lower_bound(first, last, val, cmpfunc, category());
 	}
 
@@ -151,7 +152,7 @@ namespace EcSTL{
 
 	template<class Iterator, class T>
 	Iterator upper_bound(Iterator first, Iterator last, const T& val){
-		typedef typenmae Iteraotr::iterator_category category;
+		typedef typename iterator_traits<Iterator>::iterator_category category;
 		upper_bound(first, last, val, category);
 	}
 
@@ -195,13 +196,13 @@ namespace EcSTL{
 
 	template<class Iterator, class T, class Cmp>
 	Iterator upper_bound(Iterator first, Iterator last, const T& val, Cmp cmpfunc){
-		typedef typenmae Iteraotr::iterator_category category;
-		upper_bound(first, last, val, cmpfunc, category);
+		typename typename iterator_traits<Iterator>::iterator_category category;
+		return upper_bound(first, last, val, cmpfunc, category);
 	}
 
 	template<class Iterator, class T, class Cmp>
 	Iterator upper_bound(Iterator first, Iterator last, const T& val, Cmp cmpfunc, random_access_iterator_tag){
-		typedef typename Iterator::difference_type difference_type;
+		typedef int difference_type;
 		difference_type n = last - first;
 		Iterator mid;
 		difference_type half;
@@ -210,7 +211,7 @@ namespace EcSTL{
 			half = n >> 1;
 			mid = first + half;
 
-			if (val < *mid){
+			if (cmpfunc(val, *mid)){
 				n = half;
 			}
 			else{
@@ -233,7 +234,7 @@ namespace EcSTL{
 			half = n >> 1;
 			mid = advance(first, half);
 
-			if (val < *mid){
+			if (cmpfunc(val, *mid)){
 				n = half;
 			}
 			else{
@@ -245,7 +246,17 @@ namespace EcSTL{
 
 	}
 
+	template<class Iterator, class T>
+	bool binary_search(Iterator first, Iterator last, const T& val){
+		Iterator result = lower_bound(first, last, val);
+s		return result != last && !(val, *result);
+	}
 
+	template<class Iterator, class T, class Cmp>
+	bool binary_search(Iterator first, Iterator last, const T& val, Cmp cmpfunct){
+		Iterator result = lower_bound(first, last, val, cmpfunct);
+		return result != last && !cmpfunct(val, *result);
+	}
 
 
 

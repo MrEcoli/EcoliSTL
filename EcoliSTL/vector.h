@@ -226,6 +226,23 @@ namespace EcSTL{
 				swap(*first, *last);
 			}
 		}
+
+		void reserve(size_type n){
+			size_type old_size = capacity();
+			if (old_size >= n){
+				return;
+			}
+			else{
+				iterator new_start = (iterator)Alloc::allocate(n);
+				vector<T> new_vec;
+				new_vec.vec_start = new_start;
+				new_vec.vec_end = new_start + old_size;
+				new_vec.vec_reserve = new_start + n;
+				uninitialized_copy(vec_reserve, vec_end, new_vec.vec_start);
+				this->swap(new_vec);
+			}
+		}
+
 	};
 	//insert_aux 在目的位置插入一个对象；
 	template<class T, class Alloc>

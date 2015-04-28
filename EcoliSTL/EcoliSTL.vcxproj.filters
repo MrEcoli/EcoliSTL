@@ -41,6 +41,9 @@
     <ClCompile Include="UnitTest\dheap_test.cpp">
       <Filter>UnitTest</Filter>
     </ClCompile>
+    <ClCompile Include="UnitTest\algorithm_test.cpp">
+      <Filter>UnitTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="_type_trait.h">
@@ -92,6 +95,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="d_heap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ecstl_hash_func.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pair.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="hash_function.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
