@@ -15,48 +15,118 @@ using std::endl;
 #include "hashtable.h"
 #include "stl_hash_function.h"
 #include <stdlib.h>
-void printVal(int v){
-	for (int i = 0; i != v; ++i) {
-		cout << "*";
+#include "unordered_set.h"
+#include "unordered_map.h"
+//base function
+
+enum color{
+	Red = 0,
+	Black = 1
+};
+
+struct rb_node{
+	int val;
+	rb_node* left;
+	rb_node* right;
+	rb_node* parent;
+	bool color;
+	rb_node() :left(nullptr), right(nullptr), parent(nullptr), color(Black){}
+	rb_node(int v) :val(v), left(nullptr), right(nullptr), parent(nullptr), color(Black){}
+};
+
+
+typedef rb_node* pNode;
+
+void print_rb_tree(pNode root){
+	if (root){
+		print_rb_tree(root->left);
+		cout << root->val << " ";
+		print_rb_tree(root->right);
 	}
-	cout << endl;
+}
+
+void left_rotate(pNode current_node){
+	if (current_node->right){
+		pNode node_a = current_node;
+		pNode node_b = node_a->right;
+		node_a->right = node_b->left;
+		if (node_b->left){
+			node_b->left->parent = node_a;
+		}
+		node_b->parent = node_a->parent;
+		if (node_a->parent){
+			if (node_a == node_a->parent->left){
+				node_a->parent->left = node_b;
+			}
+			else{
+				node_a->parent->right = node_b;
+			}
+		}
+		node_a->parent = node_b;
+		node_b->left = node_a;
+	}
 }
 
 
-//test function for d_heap
+void right_ratate(pNode current_node){
+	if (current_node->left){
+		pNode node_a = current_node;
+		pNode node_b = current_node->left;
 
-void unitTest1(){
-	int arr[] = { 7, 6, 5, 5, 4, 3, 2, 2 };
-
-	EcSTL::hashtable<int, int, EcSTL::hash<int>, EcSTL::identity<int>, EcSTL::equal_to<int>> ht(1, EcSTL::hash<int>(), EcSTL::equal_to<int>());
-
-	for (size_t i = 0; i < 8; i++)
-	{
-		ht.insert_unique(i);
+		node_a->left = node_b->right;
+		if (node_b->right){
+			node_b->right->parent = node_a;
+		}
+		node_b->parent = node_a->parent;
+		if (node_a->parent){
+			if (node_a == node_a->parent->left){
+				node_a->parent->left = node_b;
+			}
+			else
+			{
+				node_a->parent->right = node_b;
+			}
+		}
+		node_b->right = node_a;
+		node_a->parent = node_b;
 	}
-
-	ht.print();
 }
 
-
-void unitTest2(){
-	EcSTL::hashtable<int, int, EcSTL::hash<int>, EcSTL::identity<int>, EcSTL::equal_to<int>> ht(1, EcSTL::hash<int>(), EcSTL::equal_to<int>());
-	for (size_t i = 0; i < 1000; i++)
-	{
-		ht.insert_equal(rand ());
+void insert(pNode root, int val){
+	if (root){
+		root = new rb_node(val);
+		root->color = Black;
+		return;
 	}
-	ht.print();
-	cout << ht.size();
-}
 
-void unitTest2(){
-	EcSTL::hashtable<int, int, EcSTL::hash<int>, EcSTL::identity<int>, EcSTL::equal_to<int>> ht(1, EcSTL::hash<int>(), EcSTL::equal_to<int>());
-	for (size_t i = 0; i < 1000; i++)
-	{
-		ht.insert_unique(rand());
+	pNode cur = root;
+	pNode prev = nullptr;
+	while (cur) {
+		prev = cur;
+		if (val < cur->val){
+			cur = cur->left;
+		}
+		else
+		{
+			cur = cur->right;
+		}
 	}
-	ht.print();
-	cout << ht.size();
+
+	if (val < prev->val){
+		prev->left = new rb_node(val);
+		prev->left->parent = prev;
+		prev->left->color = Red;
+	}
+	else{
+		prev->right = new rb_node(val);
+		prev->right->parent = prev;
+		prev->right->color = Red;
+	}
+
+	if (prev->color == Red){
+		insert_balance_rbtree(p);
+	}
+
 }
 
 
@@ -66,9 +136,10 @@ void unitTest2(){
 
 int main(){
 
-	unitTest2();
+	rb_node root;
+	root.val = 10;
 
-
+	print_rb_tree(&root);
 
 	cin.get();
 	return 0;

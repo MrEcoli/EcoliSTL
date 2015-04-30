@@ -73,8 +73,11 @@
     <ClCompile Include="UnitTest\algorithm_test.cpp" />
     <ClCompile Include="UnitTest\deque_test.cpp" />
     <ClCompile Include="UnitTest\dheap_test.cpp" />
+    <ClCompile Include="UnitTest\hash_table_test.cpp" />
     <ClCompile Include="UnitTest\priority_queue_test.cpp" />
     <ClCompile Include="UnitTest\stack_test.cpp" />
+    <ClCompile Include="UnitTest\unordered_map_test.cpp" />
+    <ClCompile Include="UnitTest\unordered_set_test.cpp" />
     <ClCompile Include="UnitTest\vector_test.cpp" />
     <ClCompile Include="UnitTest\list_test.cpp" />
   </ItemGroup>
@@ -87,7 +90,6 @@
     <ClInclude Include="ecstl_hash_func.h" />
     <ClInclude Include="functional.h" />
     <ClInclude Include="hashtable.h" />
-    <ClInclude Include="hash_function.h" />
     <ClInclude Include="iterator.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="pair.h" />
@@ -97,6 +99,8 @@
     <ClInclude Include="stl_hash_function.h" />
     <ClInclude Include="sub_alloc.h" />
     <ClInclude Include="ec_timer.h" />
+    <ClInclude Include="unordered_map.h" />
+    <ClInclude Include="unordered_set.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="_type_trait.h" />
   </ItemGroup>

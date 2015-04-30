@@ -114,7 +114,7 @@ namespace EcSTL{
 
 	inline void destroy(char*, char*){}
 
-	inline void destory(wchar_t*, wchar_t*){}
+	inline void destroy(wchar_t*, wchar_t*){}
 
 
 	//首先萃取iterator的value_type
