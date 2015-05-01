@@ -70,6 +70,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Others\rb_tree_not_template.cpp" />
     <ClCompile Include="UnitTest\algorithm_test.cpp" />
     <ClCompile Include="UnitTest\deque_test.cpp" />
     <ClCompile Include="UnitTest\dheap_test.cpp" />
@@ -95,6 +96,8 @@
     <ClInclude Include="pair.h" />
     <ClInclude Include="priority_queue.h" />
     <ClInclude Include="queue.h" />
+    <ClInclude Include="rb_tree.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stack.h" />
     <ClInclude Include="stl_hash_function.h" />
     <ClInclude Include="sub_alloc.h" />
@@ -103,6 +106,9 @@
     <ClInclude Include="unordered_set.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="_type_trait.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EcSTL.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

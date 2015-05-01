@@ -18,6 +18,9 @@
       <Extensions>
       </Extensions>
     </Filter>
+    <Filter Include="Others">
+      <UniqueIdentifier>{af3dc158-70b1-4204-a4ec-a467cacd064f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -52,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="UnitTest\unordered_set_test.cpp">
       <Filter>UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="Others\rb_tree_not_template.cpp">
+      <Filter>Others</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,5 +124,16 @@
     <ClInclude Include="unordered_map.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="rb_tree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EcSTL.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -1,13 +1,13 @@
-﻿生成启动时间为 2015/4/30 20:14:57。
+﻿生成启动时间为 2015/5/2 1:58:01。
      1>项目“C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\EcoliSTL\EcoliSTL.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /FR"Debug\\" /Gd /TP /analyze- /errorReport:prompt main.cpp UnitTest\unordered_map_test.cpp UnitTest\unordered_set_test.cpp
-         unordered_set_test.cpp
-         unordered_map_test.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /FR"Debug\\" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-         正在生成代码...
+     1>c:\users\liangquan\documents\visual studio 2013\projects\ecolistl\ecolistl\rb_tree.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\Debug\EcSTL.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\Debug\EcSTL.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\Debug\EcSTL.lib" /MACHINE:X86 Debug\main.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\Debug\EcSTL.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\Debug\EcSTL.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\Debug\EcSTL.lib" /MACHINE:X86 Debug\EcSTL.res
+         Debug\main.obj
+         Debug\rb_tree_not_template.obj
          Debug\algorithm_test.obj
          Debug\deque_test.obj
          Debug\dheap_test.obj
@@ -20,9 +20,9 @@
          Debug\list_test.obj
          EcoliSTL.vcxproj -> C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\Debug\EcSTL.exe
        BscMake:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\bscmake.exe /nologo /o"C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\Debug\EcSTL.bsc" /n Debug\main.sbr Debug\algorithm_test.sbr Debug\deque_test.sbr Debug\dheap_test.sbr Debug\hash_table_test.sbr Debug\priority_queue_test.sbr Debug\stack_test.sbr Debug\unordered_map_test.sbr Debug\unordered_set_test.sbr Debug\vector_test.sbr Debug\list_test.sbr
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\bscmake.exe /nologo /o"C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\Debug\EcSTL.bsc" /n Debug\main.sbr Debug\rb_tree_not_template.sbr Debug\algorithm_test.sbr Debug\deque_test.sbr Debug\dheap_test.sbr Debug\hash_table_test.sbr Debug\priority_queue_test.sbr Debug\stack_test.sbr Debug\unordered_map_test.sbr Debug\unordered_set_test.sbr Debug\vector_test.sbr Debug\list_test.sbr
      1>已完成生成项目“C:\Users\LiangQuan\Documents\Visual Studio 2013\Projects\EcoliSTL\EcoliSTL\EcoliSTL.vcxproj”(Build 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:02.11
+已用时间 00:00:01.43
