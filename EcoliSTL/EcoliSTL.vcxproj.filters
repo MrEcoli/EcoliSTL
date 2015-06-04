@@ -59,6 +59,9 @@
     <ClCompile Include="Others\rb_tree_not_template.cpp">
       <Filter>Others</Filter>
     </ClCompile>
+    <ClCompile Include="UnitTest\string_test.cpp">
+      <Filter>UnitTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="_type_trait.h">
@@ -128,6 +131,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="string.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
