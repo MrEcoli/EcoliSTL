@@ -45,6 +45,23 @@ namespace EcSTL{
 		return result;
 	}
 
+	template<typename Bidirect_iterator>
+	void reverse(Bidirect_iterator _first, Bidirect_iterator _last){
+		--_last;
+
+		while (_first < _last)
+		{
+			swap(*_first, *_last);
+			++_first;
+			--_last;
+		}
+
+	}
+
+
+
+
+
 	template<class T, class Cmp = greater<T>>
 	T& max(const T& v1, const T& v2){
 
@@ -62,11 +79,11 @@ namespace EcSTL{
 	template<class Iterator, class T>
 	Iterator lower_bound(Iterator first, Iterator last, const T& val){
 		typedef typename iterator_traits<Iterator>::iterator_category category;
-		return lower_bound(first, last, val, category());
+		return lower_bound_help(first, last, val, category());
 	}
 
 	template<class Iterator, class T>
-	Iterator lower_bound(Iterator first, Iterator last, const T& val, random_access_iterator_tag){
+	Iterator lower_bound_help(Iterator first, Iterator last, const T& val, random_access_iterator_tag){
 		Iterator mid = first;
 		while (first < last){
 			mid = first + ((last - first) >> 1);
@@ -83,7 +100,7 @@ namespace EcSTL{
 	}
 
 	template<class Iterator, class T>
-	Iterator lower_bound(Iterator first, Iterator last, const T& val, forward_iterator_tag){
+	Iterator lower_bound_help(Iterator first, Iterator last, const T& val, forward_iterator_tag){
 		typedef Iterator::difference_type difference_type;
 		difference_type n = distance(first, last);
 		Iterator mid = first;
@@ -106,12 +123,12 @@ namespace EcSTL{
 	template<class Iterator, class T, class Cmp>
 	Iterator lower_bound(Iterator first, Iterator last, const T& val, Cmp cmpfunc){
 		typedef typename iterator_traits<Iterator>::iterator_category category;
-		return lower_bound(first, last, val, cmpfunc, category());
+		return lower_bound_help(first, last, val, cmpfunc, category());
 	}
 
 
 	template<class Iterator, class T, class Cmp>
-	Iterator lower_bound(Iterator first, Iterator last, const T& val, Cmp cmpfunc, random_access_iterator_tag){
+	Iterator lower_bound_help(Iterator first, Iterator last, const T& val, Cmp cmpfunc, random_access_iterator_tag){
 		Iterator mid = first;
 
 		while (first < last) {
@@ -129,15 +146,16 @@ namespace EcSTL{
 	}
 
 	template<class Iterator, class T, class Cmp>
-	Iterator lower_bound(Iterator first, Iterator last, const T& val, Cmp cmpfunc, forward_iterator_tag){
+	Iterator lower_bound_help(Iterator first, Iterator last, const T& val, Cmp cmpfunc, forward_iterator_tag){
 		Iterator mid = first;
-		typedef typename Iterator::difference_type difference_type;
+		typedef typename iterator_traits<Iterator>::difference_type difference_type;
 		difference_type n = distance(first, last);
 		difference_type half;
 
 		while (n) {
 			half = n >> 1;
-			mid = advance(first, half);
+			mid = first;
+			advance(first, half);
 
 			if (cmpfunc(*mid, val)){
 				first = mid++;
@@ -152,18 +170,13 @@ namespace EcSTL{
 
 	template<class Iterator, class T>
 	Iterator upper_bound(Iterator first, Iterator last, const T& val){
-		typedef typename iterator_traits<Iterator>::iterator_category category;
-		upper_bound(first, last, val, category);
-	}
-
-	template<class Iterator, class T>
-	Iterator upper_bound(Iterator first, Iterator last, const T* val, random_access_iterator_tag){
-		typedef typename Iterator::difference_type difference_type;
+		typedef typename iterator_traits<Iterator>::difference_type difference_type;
 		difference_type n = distance(first, last);
 		Iterator mid;
 		while (n) {
 			difference_type half = n >> 1;
-			mid = first + half;
+			mid = first;
+			advance(mid, half);
 			if (val < *mid){
 				n = half;
 			}
@@ -175,64 +188,19 @@ namespace EcSTL{
 		return first;
 	}
 
-	template<class Iterator, class T>
-	Iterator upper_bound(Iterator first, Iterator last, const T* val, forward_iterator_tag){
-		typedef typename Iterator::difference_type difference_type;
-		difference_type n = distance(first, last);
-		Iterator mid;
-		while (n) {
-			difference_type half = n >> 1;
-			mid = advance(first, half);
-			if (val < *mid){
-				n = half;
-			}
-			else{
-				n = n - half - 1;
-				first = ++mid;
-			}
-		}
-		return first;
-	}
+
 
 	template<class Iterator, class T, class Cmp>
 	Iterator upper_bound(Iterator first, Iterator last, const T& val, Cmp cmpfunc){
-		typename typename iterator_traits<Iterator>::iterator_category category;
-		return upper_bound(first, last, val, cmpfunc, category);
-	}
-
-	template<class Iterator, class T, class Cmp>
-	Iterator upper_bound(Iterator first, Iterator last, const T& val, Cmp cmpfunc, random_access_iterator_tag){
-		typedef int difference_type;
-		difference_type n = last - first;
-		Iterator mid;
-		difference_type half;
-
-		while (n) {
-			half = n >> 1;
-			mid = first + half;
-
-			if (cmpfunc(val, *mid)){
-				n = half;
-			}
-			else{
-				first = ++mid;
-				n = n - half - 1;
-			}
-		}
-		return first;
-
-	}
-
-	template<class Iterator, class T, class Cmp>
-	Iterator upper_bound(Iterator first, Iterator last, const T& val, Cmp cmpfunc, forward_iterator_tag){
-		typedef typename Iterator::difference_type difference_type;
+		typedef typename iterator_traits<Iterator>::difference_type difference_type;
 		difference_type n = distance(first, last);
 		Iterator mid;
 		difference_type half;
 
 		while (n) {
 			half = n >> 1;
-			mid = advance(first, half);
+			mid = first;
+			advance(mid, half);
 
 			if (cmpfunc(val, *mid)){
 				n = half;
@@ -243,13 +211,14 @@ namespace EcSTL{
 			}
 		}
 		return first;
-
 	}
+
+
 
 	template<class Iterator, class T>
 	bool binary_search(Iterator first, Iterator last, const T& val){
 		Iterator result = lower_bound(first, last, val);
-s		return result != last && !(val, *result);
+		return result != last && val ==  *result;
 	}
 
 	template<class Iterator, class T, class Cmp>
@@ -257,6 +226,129 @@ s		return result != last && !(val, *result);
 		Iterator result = lower_bound(first, last, val, cmpfunct);
 		return result != last && !cmpfunct(val, *result);
 	}
+
+
+	template<class Iterator, class Pred>
+	Iterator partition(Iterator first, Iterator last, Pred _pred){
+		if (first == last) return first;
+
+		while (_pred(*first))
+			if (++first == last)
+				return first;
+
+		Iterator nxt_pos = first;
+
+
+		while (++nxt_pos != last) {
+			if (_pred(*nxt_pos)){
+				swap(*first, *nxt_pos);
+				++first;
+			}
+		}
+		return first;
+	}
+
+	template<typename Iterator>
+	void sort(Iterator first, Iterator last){
+		typedef typename iterator_traits<Iterator>::value_type value_type;
+		if (first == last) return;
+
+		Iterator from = next(first);
+
+		Iterator pos = partition(from, last, bind2nd(less<value_type>(), *first));
+
+		swap(*first, *(prev(pos)));
+		
+		sort(first, prev(pos));
+		sort(pos, last);
+	}
+
+	template<typename Iterator, typename Pred>
+	void sort(Iterator first, Iterator last, Pred _pred_func){
+		typedef typename iterator_traits<Iterator>::value_type value_type;
+		if (first == last) return;
+
+		Iterator from = next(first);
+
+		Iterator pos = EcSTL::partition(from, last, EcSTL::bind2nd(_pred_func, *first));
+		
+		swap(*first, *(prev(pos)));
+		
+
+		EcSTL::sort(first, prev (pos), _pred_func);
+		EcSTL::sort(pos, last, _pred_func);
+		
+	}
+
+
+
+
+	template<typename Iterator, typename T>
+	Iterator find(Iterator first, Iterator last, const T& _v){
+		while (first != last && *first != _v)
+			++first;
+		return first;
+	}
+
+	template<typename Iterator, typename Cond_func>
+	Iterator find_if(Iterator first, Iterator last, Cond_func _cond_func){
+		while (first != last && !_cond_func(*first)) 
+			++first;
+		return first;
+	}
+
+	template<typename Iterator, typename _Pred>
+	typename iterator_traits<Iterator>::difference_type count_if(Iterator first, Iterator last, _Pred _pred_func){
+		typename iterator_traits<Iterator>::difference_type n = 0;
+		while (first != last)
+			if (_pred_func(*first++)) ++n;
+
+		return n;
+	}
+
+
+	template<typename Iterator, typename T>
+	T accumulate(Iterator first, Iterator last, T _x){
+		while (first != last){
+			T _y = *first++;
+			_x = plus<T>()(_x, _y);
+		}
+		
+		return _x;
+	}
+
+	template<typename Iterator, typename T, typename Func>
+	T accumulate(Iterator first, Iterator last, T _x, Func _func){
+		while (first != last){
+			T _y = *first++;
+			_x = _func(_x, _y);
+
+		}
+
+		return _x;
+	}
+
+	template<typename Iterator1, typename Iterator2>
+	inline void iter_swap(Iterator1 rhs, Iterator2 lhs){
+		typename iterator_traits<Iterator1>::value_type tmp = *rhs;
+		*rhs = *lhs;
+		*lhs = tmp;
+	}
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -410,8 +502,6 @@ s		return result != last && !(val, *result);
 			parent = (cur_pos - 1) >> 1;
 		}
 	}
-		
-
 
 
 }

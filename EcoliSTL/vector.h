@@ -6,6 +6,7 @@
 #include "_type_trait.h"
 #include "iterator.h"
 #include "algorithm.h"
+#include "iterator.h"
 #include <iostream>
 #include <process.h>
 
@@ -21,7 +22,9 @@ namespace EcSTL{
 		typedef value_type* iterator;
 		typedef const value_type* const_iterator;
 		typedef value_type& reference;
+		typedef const value_type& const_reference;
 		typedef size_t size_type;
+		typedef reverse_iterator<iterator> reverse_iterator;
 
 	protected:
 		enum { _DEFAULT_AOLLOCATE_STORE = 2 };
@@ -54,6 +57,11 @@ namespace EcSTL{
 		vector(size_type n, const T& val){
 			fill_initialize(n, val);
 		}
+		vector(int n, const T& val){
+			if (n >= 0){
+				fill_initialize(n, val);
+			}
+		}
 
 		explicit vector(size_type n){
 			vec_start = (iterator)(Alloc::allocate(n * _DEFAULT_AOLLOCATE_STORE));
@@ -84,7 +92,8 @@ namespace EcSTL{
 
 		template<class Iterator>
 		vector(Iterator first, Iterator last){
-			difference_type n = distance(first, last);
+			difference_type n = 0;
+			n = distance(first, last);
 
 			if (n == 0){
 				vec_start = vec_end = vec_reserve = 0;
@@ -101,11 +110,16 @@ namespace EcSTL{
 		//常用的成员函数
 
 		iterator begin(){ return vec_start; }
-		iterator begin()const{ return vec_start; }
+		const_iterator begin()const{ return vec_start; }
 		iterator end(){ return vec_end; }
-		iterator end()const { return vec_end; }
+		const_iterator end()const { return vec_end; }
+
 		const_iterator cbegin()const { return vec_start; }
 		const_iterator cend()const { return vec_end; }
+
+		reverse_iterator rbegin(){ return reverse_iterator(end()); }
+		reverse_iterator rend(){ return reverse_iterator(begin()); }
+
 		T& front(){ return *vec_start; }
 		const T& front()const{ return *vec_start; }
 		T& back(){ return *(vec_end - 1); }

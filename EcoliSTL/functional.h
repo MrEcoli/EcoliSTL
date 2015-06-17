@@ -12,6 +12,7 @@ namespace EcSTL {
 	//STL所有的一元仿函数必须继承以下类, 型别声明
 	template<class T, class Result>
 	class unary_function{
+	public:
 		typedef T argument_type;
 		typedef Result result_type;
 	};
@@ -20,6 +21,7 @@ namespace EcSTL {
 
 	template<class Arg1, class Arg2, class Result>
 	class binary_function{
+	public:
 		typedef Arg1 first_argument_type;
 		typedef Arg2 second_argument_type;
 		typedef Result result_type;
@@ -187,9 +189,54 @@ namespace EcSTL {
 
 
 
+	template <class _Operation>
+	class binder1st
+		: public unary_function < typename _Operation::second_argument_type,
+		typename _Operation::result_type > {
+	protected:
+		_Operation op;
+		typename _Operation::first_argument_type value;
+	public:
+		binder1st(const _Operation& __x,
+			const typename _Operation::first_argument_type& __y)
+			: op(__x), value(__y) {}
+		typename _Operation::result_type
+			operator()(const typename _Operation::second_argument_type& __x) const {
+			return op(value, __x);
+		}
+	};
 
+	template <class _Operation, class _Tp>
+	inline binder1st<_Operation>
+		bind1st(const _Operation& __fn, const _Tp& __x)
+	{
+		typedef typename _Operation::first_argument_type _Arg1_type;
+		return binder1st<_Operation>(__fn, _Arg1_type(__x));
+	}
 
+	template<class _Operation>
+	class binder2nd
+		:public unary_function < typename _Operation::first_argument_type,
+		typename _Operation::result_type > {
+	protected:
+		_Operation _op;
+		typename _Operation::second_argument_type _v;
+	public:
+		binder2nd(const _Operation& _x, const typename _Operation::second_argument_type& _y) :_op(_x), _v(_y){}
 
+		typename typename _Operation::result_type
+			operator()(const typename _Operation::first_argument_type& _x){
+			return _op(_x, _v);
+		}
+	};
+
+	template<class Operation, class T>
+	inline binder2nd<Operation> bind2nd(const Operation& bi_func, const T& _x){
+		typedef typename Operation::second_argument_type _arg_type;
+		return binder2nd<Operation>(bi_func, _arg_type(_x));
+	}
+
+	
 }
 
 

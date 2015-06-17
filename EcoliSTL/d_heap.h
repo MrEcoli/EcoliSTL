@@ -51,7 +51,7 @@ namespace EcSTL{
 	}
 
 
-	template<class T, int d, class Seq = vector<T>, class Cmp = less<T>>
+	template<class T, int d = 2, class Seq = vector<T>, class Cmp = less<T>>
 	class dheap_pq{
 	private:
 		Seq container;

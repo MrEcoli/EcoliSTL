@@ -5,7 +5,7 @@
 #include <crtdefs.h>
 
 namespace EcSTL{
-
+	
 	template <class Category, class T, class Distance = ptrdiff_t, class Pointer = T*, class Reference = T&>
 	struct iterator{
 		typedef Category iterator_category;
@@ -50,26 +50,170 @@ namespace EcSTL{
 	};
 
 
+
+
+
+	template <class _Iterator>
+	class reverse_iterator
+	{
+	protected:
+		_Iterator current;
+	public:
+		typedef typename iterator_traits<_Iterator>::iterator_category
+			iterator_category;
+		typedef typename iterator_traits<_Iterator>::value_type
+			value_type;
+		typedef typename iterator_traits<_Iterator>::difference_type
+			difference_type;
+		typedef typename iterator_traits<_Iterator>::pointer
+			pointer;
+		typedef typename iterator_traits<_Iterator>::reference
+			reference;
+
+		typedef _Iterator iterator_type;
+		typedef reverse_iterator<_Iterator> _Self;
+
+	public:
+		reverse_iterator() {}
+		explicit reverse_iterator(iterator_type __x) : current(__x) {}
+
+		reverse_iterator(const _Self& __x) : current(__x.current) {}
+		template <class _Iter>
+		reverse_iterator(const reverse_iterator<_Iter>& __x)
+			: current(__x.base()) {}
+
+		iterator_type base() const { return current; }
+		reference operator*() const {
+			_Iterator __tmp = current;
+			return *--__tmp;
+		}
+		pointer operator->() const { return &(operator*()); }
+
+		_Self& operator++() {
+			--current;
+			return *this;
+		}
+		_Self operator++(int) {
+			_Self __tmp = *this;
+			--current;
+			return __tmp;
+		}
+		_Self& operator--() {
+			++current;
+			return *this;
+		}
+		_Self operator--(int) {
+			_Self __tmp = *this;
+			++current;
+			return __tmp;
+		}
+
+		_Self operator+(difference_type __n) const {
+			return _Self(current - __n);
+		}
+		_Self& operator+=(difference_type __n) {
+			current -= __n;
+			return *this;
+		}
+		_Self operator-(difference_type __n) const {
+			return _Self(current + __n);
+		}
+		_Self& operator-=(difference_type __n) {
+			current += __n;
+			return *this;
+		}
+		reference operator[](difference_type __n) const { return *(*this + __n); }
+	};
+
+	template <class _Iterator>
+	inline bool operator==(const reverse_iterator<_Iterator>& __x,
+		const reverse_iterator<_Iterator>& __y) {
+		return __x.base() == __y.base();
+	}
+
+	template <class _Iterator>
+	inline bool operator<(const reverse_iterator<_Iterator>& __x,
+		const reverse_iterator<_Iterator>& __y) {
+		return __y.base() < __x.base();
+	}
+
+
+	template <class _Iterator>
+	inline bool operator!=(const reverse_iterator<_Iterator>& __x,
+		const reverse_iterator<_Iterator>& __y) {
+		return !(__x == __y);
+	}
+
+	template <class _Iterator>
+	inline bool operator>(const reverse_iterator<_Iterator>& __x,
+		const reverse_iterator<_Iterator>& __y) {
+		return __y < __x;
+	}
+
+	template <class _Iterator>
+	inline bool operator<=(const reverse_iterator<_Iterator>& __x,
+		const reverse_iterator<_Iterator>& __y) {
+		return !(__y < __x);
+	}
+
+	template <class _Iterator>
+	inline bool operator>=(const reverse_iterator<_Iterator>& __x,
+		const reverse_iterator<_Iterator>& __y) {
+		return !(__x < __y);
+	}
+
+
+	template <class _Iterator>
+	inline typename reverse_iterator<_Iterator>::difference_type
+		operator-(const reverse_iterator<_Iterator>& __x,
+		const reverse_iterator<_Iterator>& __y) {
+		return __y.base() - __x.base();
+	}
+
+	template <class _Iterator>
+	inline reverse_iterator<_Iterator>
+		operator+(typename reverse_iterator<_Iterator>::difference_type __n,
+		const reverse_iterator<_Iterator>& __x) {
+		return reverse_iterator<_Iterator>(__x.base() - __n);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 	//iterator class不包含任何数据成员，只提供型别定义，新的iterator继承它不会增加负担
 	//因为已经提供了后3个型别参数的默认型别，所以在定义新的iterator时，只需要给予iterator_category以及指向的数据成员类型即可。
-	
 
+	
 	template<class Iterator>
 	inline typename iterator_traits<Iterator>::iterator_category iterator_category(const Iterator&){
 		typedef typename iterator_traits<Iterator>::iterator_category category;
 		return category();
 	}
 
-	template<class Iterator>
-	inline typename iterator_traits<Iterator>::value_type* value_type(const Iterator&){
-		return (typename iterator_traits<Iterator>::value_type*)(0);
+	template <class _Iter>
+	inline typename iterator_traits<_Iter>::difference_type*
+	__distance_type(const _Iter&)
+	{
+	return static_cast<typename iterator_traits<_Iter>::difference_type*>(0);
 	}
 
-	
-	template<class Iterator>
-	inline typename iterator_traits<Iterator>::difference_type* difference_type(const Iterator&){
-		return (typename iterator_traits<Iterator>::difference_type*)(0);
+	template <class _Iter>
+	inline typename iterator_traits<_Iter>::value_type*
+	__value_type(const _Iter&)
+	{
+	return static_cast<typename iterator_traits<_Iter>::value_type*>(0);
 	}
+
+
 
 	template<class Iterator>
 	inline typename iterator_traits<Iterator>::difference_type
@@ -108,7 +252,7 @@ namespace EcSTL{
 			iter++;
 		}
 	}
-
+	
 	template<class InputIterator, class Distance>
 	inline void _advance(InputIterator &iter, Distance n, forward_iterator_tag){
 		_advance(iter, n, input_iterator_tag());
@@ -212,12 +356,6 @@ namespace EcSTL{
 
 		return iter;
 	}
-
-
-
-
-
-
 
 
 

@@ -23,7 +23,6 @@ namespace EcSTL{
 		}
 
 		void pop(){
-
 			swap(vec.front(), vec.back());
 			vec.pop_back();
 			adjustNode(vec.begin(), 0, vec.size(), cmpfunc);
@@ -43,9 +42,6 @@ namespace EcSTL{
 		}
 
 	};
-
-
-
 }
 
 #endif

@@ -3,6 +3,7 @@
 
 #include <new>
 #include "_type_trait.h"
+#include "iterator.h"
 #include <sys\utime.h>
 
 namespace EcSTL{
@@ -52,7 +53,7 @@ namespace EcSTL{
 	template<typename ForwardIterator>
 	inline void destroy(ForwardIterator first, ForwardIterator last){
 		//这里的value_type函数是Iterator的一个内置函数，返回一个指向空指针的T*;
-		_destroy(first, last, value_type(first));
+		_destroy(first, last, __value_type(first));
 	}
 
 
@@ -120,7 +121,7 @@ namespace EcSTL{
 	//首先萃取iterator的value_type
 	template<class InputIterator, class ForwardIterator>
 	inline ForwardIterator uninitialized_copy(InputIterator first, InputIterator last, ForwardIterator out){
-		return _uninitialized_copy(first, last, out, value_type(first));
+		return _uninitialized_copy(first, last, out, __value_type(first));
 	}
 
 	template<class InputIterator, class ForwardIterator, class T>

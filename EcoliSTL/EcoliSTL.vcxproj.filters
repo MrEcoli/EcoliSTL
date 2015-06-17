@@ -26,9 +26,6 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="UnitTest\vector_test.cpp">
-      <Filter>UnitTest</Filter>
-    </ClCompile>
     <ClCompile Include="UnitTest\list_test.cpp">
       <Filter>UnitTest</Filter>
     </ClCompile>
@@ -44,9 +41,6 @@
     <ClCompile Include="UnitTest\dheap_test.cpp">
       <Filter>UnitTest</Filter>
     </ClCompile>
-    <ClCompile Include="UnitTest\algorithm_test.cpp">
-      <Filter>UnitTest</Filter>
-    </ClCompile>
     <ClCompile Include="UnitTest\hash_table_test.cpp">
       <Filter>UnitTest</Filter>
     </ClCompile>
@@ -58,9 +52,6 @@
     </ClCompile>
     <ClCompile Include="Others\rb_tree_not_template.cpp">
       <Filter>Others</Filter>
-    </ClCompile>
-    <ClCompile Include="UnitTest\string_test.cpp">
-      <Filter>UnitTest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,9 +106,6 @@
     <ClInclude Include="d_heap.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ecstl_hash_func.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="pair.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -136,10 +124,14 @@
     <ClInclude Include="string.h">
       <Filter>头文件</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="EcSTL.rc">
-      <Filter>资源文件</Filter>
-    </ResourceCompile>
+    <ClInclude Include="UnitTest\string_test.h">
+      <Filter>UnitTest</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTest\Algorithm_test.h">
+      <Filter>UnitTest</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTest\vector_test.h">
+      <Filter>UnitTest</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

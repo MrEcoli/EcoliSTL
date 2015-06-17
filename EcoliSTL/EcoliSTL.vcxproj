@@ -71,16 +71,13 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Others\rb_tree_not_template.cpp" />
-    <ClCompile Include="UnitTest\algorithm_test.cpp" />
     <ClCompile Include="UnitTest\deque_test.cpp" />
     <ClCompile Include="UnitTest\dheap_test.cpp" />
     <ClCompile Include="UnitTest\hash_table_test.cpp" />
     <ClCompile Include="UnitTest\priority_queue_test.cpp" />
     <ClCompile Include="UnitTest\stack_test.cpp" />
-    <ClCompile Include="UnitTest\string_test.cpp" />
     <ClCompile Include="UnitTest\unordered_map_test.cpp" />
     <ClCompile Include="UnitTest\unordered_set_test.cpp" />
-    <ClCompile Include="UnitTest\vector_test.cpp" />
     <ClCompile Include="UnitTest\list_test.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -89,7 +86,6 @@
     <ClInclude Include="construct.h" />
     <ClInclude Include="deque.h" />
     <ClInclude Include="d_heap.h" />
-    <ClInclude Include="ecstl_hash_func.h" />
     <ClInclude Include="functional.h" />
     <ClInclude Include="hashtable.h" />
     <ClInclude Include="iterator.h" />
@@ -104,13 +100,13 @@
     <ClInclude Include="string.h" />
     <ClInclude Include="sub_alloc.h" />
     <ClInclude Include="ec_timer.h" />
+    <ClInclude Include="UnitTest\Algorithm_test.h" />
+    <ClInclude Include="UnitTest\string_test.h" />
+    <ClInclude Include="UnitTest\vector_test.h" />
     <ClInclude Include="unordered_map.h" />
     <ClInclude Include="unordered_set.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="_type_trait.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="EcSTL.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
